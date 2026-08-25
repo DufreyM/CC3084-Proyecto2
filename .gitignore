@@ -1,0 +1,27 @@
+# Data (descargar con la API de Kaggle, ver README)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Kaggle credentials
+kaggle.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Reportes generados localmente (mantener figuras finales aparte si se desea versionar)
+*.pdf
+!reports/*.pdf
