@@ -1,4 +1,4 @@
-"""Utilidades compartidas para cargar los datos de ASL Fingerspelling. WIP."""
+"""Utilidades compartidas para cargar los datos de ASL Fingerspelling."""
 from functools import lru_cache
 import json
 
