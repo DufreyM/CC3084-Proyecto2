@@ -1,55 +1,23 @@
 # Planteamiento del problema
 
-**Responsable principal:** Maria Jose Giron Isidro
-
-> Archivo independiente — se puede editar y commitear sin tocar código ni notebooks.
-> Corresponde a los rubros **Situación Problemática (10 pts)**, **Problema científico (10 pts)**
-> y **Objetivos (10 pts)** de la guía del proyecto.
-
 ## Situación problemática
 
-<!-- TODO(equipo): Describir el contexto real que motiva el problema: por qué es
-relevante el reconocimiento automático de deletreo manual en ASL, quiénes se
-benefician (comunidad sorda, accesibilidad, traducción en tiempo real, etc.),
-y qué limitaciones tienen las soluciones actuales. 1-2 párrafos. -->
+En lengua de señas, el deletreo de letras o fingerspelling es un componente del lenguaje de señas estadounidense (ASL). Se usa para decir nombres propios, lugares, términos técnicos y otras palabras que no tengan una seña en específico.
 
-TODO
+Reconocer automaticamente el deletreo manual puede ser difícil porque las señas forman parte de secuencias de movimientos, y no imágenes independientes. Su significado varía por velocidad, posición, orientación y estilo, mientras que las frases y secuencias pueden llegar a ser muy variables. Durante la captura pueden existir cortes en imagenes o señas poco confiables debido a bloqueos o movimientos demasiado rápidos.
 
 ## Problema científico
 
-<!-- TODO(equipo): Enunciar de forma precisa el problema que se va a resolver.
-Ej: "¿Es posible transcribir con alta precisión secuencias de landmarks de
-manos/cara/pose a texto (frases deletreadas) capturadas con MediaPipe, dada la
-variabilidad entre participantes y la presencia de landmarks faltantes?"
-Debe quedar claro qué se predice, a partir de qué datos, y cuál es la
-dificultad central. -->
-
-TODO
+¿Es posbile caracterizar las secuencias de manos, rostro y pose extraídas con MediaPipe para determinar si cuentan con la información y calidad suficiente para transcribir a texto frases deletreadas con ASL, considerando la variabilidad entre participantes, diferencias de duraciones y señalizaciones faltantes? 
 
 ## Objetivos
 
 ### Objetivo general
 
-<!-- TODO(equipo): Un objetivo general, medible y alcanzable durante el EDA
-(no durante todo el proyecto de modelado). Ejemplo de alcance: "Realizar un
-análisis exploratorio de los datos de la competencia ASL Fingerspelling para
-caracterizar la estructura de las secuencias de landmarks y detectar
-problemas de calidad de datos relevantes para el modelado." -->
-
-TODO
+Realizar un análisis exploratorio (EDA) de los datos obtenidos a través de la [competencia Google - Amercian Sign Language Fingerspelling Recognition](https://www.kaggle.com/competitions/asl-fingerspelling) para caracterizar la estructura, distribución y calidad de las secuencias de señalizaciones e identificar datos que deberán ser considerados en la etapa de limpieza, pre procesamiento y posterior modelado para transcripción automática del deletreo.
 
 ### Objetivos específicos
 
-<!-- TODO(equipo): Al menos 2, medibles y alcanzables. Ejemplos de partida
-(ajustar/reemplazar según lo que efectivamente se encuentre en el EDA):
-
-1. Describir la estructura de los datos (variables, tipos, cantidad de
-   secuencias/frames, distribución de longitudes de frase y de secuencia).
-2. Identificar patrones y problemas de calidad de datos (valores faltantes en
-   landmarks, outliers, landmarks con baja confianza).
-3. Explorar relaciones entre longitud de secuencia, landmarks disponibles y
-   longitud de la frase objetivo.
--->
-
-1. TODO
-2. TODO
+1. Describir la estructura del conjunto de datos mediante la identificación de sus variables, tipos de datos, cantidad de participantes, frases, secuencias, frames y puntos corporales clave disponibles.
+2. Analizar las distribuciones de la duración de las secuencias y de la longitud de las frases objetivo, identificando valores atípicos y diferencias relevantes entre participantes.
+3. Cuantificar y visualizar la presencia de valores faltantes en los landmarks de manos, rostro y pose, con el fin de reconocer patrones de pérdida de información y determinar qué regiones corporales presentan mayor disponibilidad de datos.
