@@ -84,28 +84,27 @@ agrégala ahí en vez de duplicar código en tu notebook.
 
 ## Cómo obtener los datos
 
-Los datos son grandes y no se versionan en GitHub. Dos formas de descargarlos
-(elige una):
+El dataset completo de la competencia son **158 GB** — no hace falta para un
+EDA. Todo el equipo descarga la misma **muestra fija** (misma metadata
+completa + 2 archivos de landmarks), corriendo
+[notebooks/00_setup_datos.ipynb](notebooks/00_setup_datos.ipynb):
 
 1. Aceptar las reglas de la competencia en Kaggle: https://www.kaggle.com/competitions/asl-fingerspelling/rules
-2. Configurar credenciales de Kaggle (API token).
+2. Configurar credenciales de Kaggle (`~/.kaggle/kaggle.json`, API token desde https://www.kaggle.com/settings).
+3. Correr `00_setup_datos.ipynb`, que descarga con la CLI de `kaggle` (no
+   `kagglehub`: para archivos individuales devuelve el contenido comprimido en
+   zip pero nombrado sin `.zip`, lo cual rompe la lectura en silencio):
+   - `train.csv`, `supplemental_metadata.csv`, `character_to_prediction_index.json` (completos, pocos MB)
+   - los 2 archivos de `train_landmarks/` listados en `config.SAMPLE_LANDMARK_PATHS`
+     (~1.5 GB cada uno, ~1000 secuencias cada uno — de sobra para EDA)
 
-**Opción A — `kagglehub` (recomendada, la usa [notebooks/00_setup_datos.ipynb](notebooks/00_setup_datos.ipynb)):**
+Si en algún momento se necesitara el dataset completo (no para este
+entregable), es `kagglehub.competition_download("asl-fingerspelling")` —
+descarga los 158 GB en un solo archivo no reanudable.
 
-```python
-import kagglehub
-path = kagglehub.competition_download("asl-fingerspelling")
-```
-
-`00_setup_datos.ipynb` ya guarda esa ruta para que `src/config.py` la
-encuentre automáticamente (no hace falta copiar nada a `data/raw/`).
-
-**Opción B — CLI de Kaggle, descargando directo a `data/raw/`:**
-
-```bash
-kaggle competitions download -c asl-fingerspelling -p data/raw/
-unzip data/raw/asl-fingerspelling.zip -d data/raw/
-```
+**Importante:** todos deben usar la misma muestra (`config.SAMPLE_LANDMARK_PATHS`).
+Si cada quien descarga archivos distintos, los notebooks que referencian esa
+muestra fallan o dan resultados distintos según la máquina.
 
 ## Entorno de trabajo
 
