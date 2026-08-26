@@ -42,6 +42,39 @@ CC3084-Proyecto2/
 └── README.md
 ```
 
+## Plan de trabajo y asignaciones
+
+Cada tarea vive en un archivo independiente (notebook o markdown) para que cada
+integrante pueda avanzar y **commitear su parte sin generar conflictos** con
+el trabajo de los demás.
+
+| # | Archivo | Actividad de la guía | Responsable |
+|---|---------|----------------------|-------------|
+| 1 | [docs/01_planteamiento.md](docs/01_planteamiento.md) | Situación problemática, problema científico, objetivos (30 pts) | María José Girón Isidro |
+| 2 | [docs/02_investigacion_tecnica.md](docs/02_investigacion_tecnica.md) | Actividad 1: investigación del tema | José Donado |
+| 3 | [notebooks/01_estructura_datos.ipynb](notebooks/01_estructura_datos.ipynb) | Actividad 4a + Descripción de los datos | Leonardo Dufrey Mejía Mejía |
+| 4 | [notebooks/02_limpieza_preprocesamiento.ipynb](notebooks/02_limpieza_preprocesamiento.ipynb) | Actividad 3: limpieza y preprocesamiento | Cindy Mishelle Gualim Perez |
+| 5 | [notebooks/03_analisis_univariado.ipynb](notebooks/03_analisis_univariado.ipynb) | Actividad 4b: resumen numérico y tablas de frecuencia | Daniela Ramírez de León |
+| 6 | [notebooks/04_analisis_bivariado.ipynb](notebooks/04_analisis_bivariado.ipynb) | Actividad 4c: cruce de variables y correlaciones | María José Girón Isidro |
+| 7 | [notebooks/05_visualizaciones.ipynb](notebooks/05_visualizaciones.ipynb) | Actividad 4d: gráficos exploratorios | José Donado |
+| 8 | [docs/03_hallazgos_conclusiones.md](docs/03_hallazgos_conclusiones.md) | Actividad 5: hallazgos y conclusiones | Todo el equipo (al final, una vez cerrados 1-7) |
+
+`src/config.py` y `src/data_loading.py` son utilidades **compartidas** ya
+armadas (rutas y funciones de carga de `train.csv` / parquet de landmarks) —
+si alguien necesita una función nueva de carga de datos, se agrega ahí en vez
+de duplicar código en su notebook.
+
+### Flujo de git sugerido (para evitar conflictos)
+
+1. `git pull` antes de empezar a trabajar.
+2. Trabajar **solo** en tu(s) archivo(s) asignado(s) de la tabla de arriba.
+3. Commits pequeños y frecuentes, con mensajes claros, por ejemplo:
+   `git commit -m "01_estructura_datos: describir columnas de train.csv"`.
+4. `git push` seguido. Como cada quien toca archivos distintos, no debería
+   haber conflictos de merge.
+5. Si necesitas modificar un archivo de otra persona (p. ej. una función en
+   `src/`), avisa en el grupo antes de hacerlo.
+
 ## Cómo obtener los datos
 
 Los datos son grandes y no se versionan en GitHub. Para descargarlos:
