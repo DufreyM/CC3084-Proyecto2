@@ -26,18 +26,18 @@ from . import config
 
 def load_train_index() -> pd.DataFrame:
     """Carga train.csv: metadata de cada secuencia (una fila por secuencia)."""
-    return pd.read_csv(config.TRAIN_CSV)
+    return pd.read_csv(config.train_csv_path())
 
 
 def load_supplemental_index() -> pd.DataFrame:
     """Carga supplemental_metadata.csv (secuencias sin frase verificada por humano)."""
-    return pd.read_csv(config.SUPPLEMENTAL_CSV)
+    return pd.read_csv(config.supplemental_csv_path())
 
 
 @lru_cache(maxsize=1)
 def load_char_to_prediction_index() -> dict:
     """Carga el mapeo caracter -> indice usado para codificar las frases."""
-    with open(config.CHAR_TO_PRED_JSON, "r", encoding="utf-8") as f:
+    with open(config.char_to_pred_json_path(), "r", encoding="utf-8") as f:
         return json.load(f)
 
 
