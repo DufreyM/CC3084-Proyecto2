@@ -7,5 +7,4 @@ scipy
 scikit-learn
 jupyter
 kaggle
-kagglehub
 tqdm
