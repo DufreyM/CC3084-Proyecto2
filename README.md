@@ -48,8 +48,15 @@ Cada tarea vive en un archivo independiente (notebook o markdown) para que cada
 integrante pueda avanzar y **commitear su parte sin generar conflictos** con
 el trabajo de los demás.
 
+`notebooks/00_setup_datos.ipynb` (descarga de datos, entorno) es **trabajo
+general/compartido**, no se cuenta en la carga individual de nadie — cualquiera
+lo puede correr y ajustar. Las 7 tareas de EDA propiamente dichas no se
+dividen exacto entre 5 personas (7/5), así que la repartición más pareja
+posible es 2 archivos para dos integrantes y 1 archivo para las otras tres:
+
 | # | Archivo | Actividad de la guía | Responsable |
 |---|---------|----------------------|-------------|
+| 0 | [notebooks/00_setup_datos.ipynb](notebooks/00_setup_datos.ipynb) | Setup: descarga de datos con `kagglehub` y entorno | General / compartido (todos) |
 | 1 | [docs/01_planteamiento.md](docs/01_planteamiento.md) | Situación problemática, problema científico, objetivos (30 pts) | María José Girón Isidro |
 | 2 | [docs/02_investigacion_tecnica.md](docs/02_investigacion_tecnica.md) | Actividad 1: investigación del tema | José Donado |
 | 3 | [notebooks/01_estructura_datos.ipynb](notebooks/01_estructura_datos.ipynb) | Actividad 4a + Descripción de los datos | Leonardo Dufrey Mejía Mejía |
@@ -77,16 +84,28 @@ de duplicar código en su notebook.
 
 ## Cómo obtener los datos
 
-Los datos son grandes y no se versionan en GitHub. Para descargarlos:
+Los datos son grandes y no se versionan en GitHub. Dos formas de descargarlos
+(elige una):
 
 1. Aceptar las reglas de la competencia en Kaggle: https://www.kaggle.com/competitions/asl-fingerspelling/rules
-2. Configurar la API de Kaggle (`~/.kaggle/kaggle.json` con tu API token).
-3. Descargar y descomprimir en `data/raw/`:
+2. Configurar credenciales de Kaggle (API token).
 
-   ```bash
-   kaggle competitions download -c asl-fingerspelling -p data/raw/
-   unzip data/raw/asl-fingerspelling.zip -d data/raw/
-   ```
+**Opción A — `kagglehub` (recomendada, la usa [notebooks/00_setup_datos.ipynb](notebooks/00_setup_datos.ipynb)):**
+
+```python
+import kagglehub
+path = kagglehub.competition_download("asl-fingerspelling")
+```
+
+`00_setup_datos.ipynb` ya guarda esa ruta para que `src/config.py` la
+encuentre automáticamente (no hace falta copiar nada a `data/raw/`).
+
+**Opción B — CLI de Kaggle, descargando directo a `data/raw/`:**
+
+```bash
+kaggle competitions download -c asl-fingerspelling -p data/raw/
+unzip data/raw/asl-fingerspelling.zip -d data/raw/
+```
 
 ## Entorno de trabajo
 
