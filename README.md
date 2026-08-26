@@ -66,10 +66,10 @@ posible es 2 archivos para dos integrantes y 1 archivo para las otras tres:
 | 7 | [notebooks/05_visualizaciones.ipynb](notebooks/05_visualizaciones.ipynb) | Actividad 4d: gráficos exploratorios | José Donado |
 | 8 | [docs/03_hallazgos_conclusiones.md](docs/03_hallazgos_conclusiones.md) | Actividad 5: hallazgos y conclusiones | Todo el equipo (al final, una vez cerrados 1-7) |
 
-`src/config.py` y `src/data_loading.py` son utilidades **compartidas** ya
-armadas (rutas y funciones de carga de `train.csv` / parquet de landmarks) —
-si alguien necesita una función nueva de carga de datos, se agrega ahí en vez
-de duplicar código en su notebook.
+`src/config.py` y `src/data_loading.py` son utilidades **compartidas** (rutas
+y funciones de carga de `train.csv` / parquet de landmarks) — están en
+progreso, no completas. Si necesitas una función nueva de carga de datos,
+agrégala ahí en vez de duplicar código en tu notebook.
 
 ### Flujo de git sugerido (para evitar conflictos)
 
