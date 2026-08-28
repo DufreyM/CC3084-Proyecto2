@@ -14,7 +14,15 @@ justificación (02), estadística descriptiva y tablas de frecuencia (03),
 relaciones entre variables y outliers (04), y lo que muestran los gráficos
 (05). No repetir todo el detalle, solo lo accionable/relevante. -->
 
-- TODO (de [01_estructura_datos](../notebooks/01_estructura_datos.ipynb))
+- **[01_estructura_datos](../notebooks/01_estructura_datos.ipynb):** train.csv trae 67,208
+  secuencias de 94 participantes, pero muy desbalanceados entre si -- van de 1 a 1535
+  secuencias por persona (mediana 794), asi que cualquier comparacion por participante
+  hay que tomarla con cuidado. Las frases van de 1 a 31 caracteres (mediana 17). Cada
+  parquet de landmarks trae unas 1000 secuencias, indexadas por sequence_id (no es
+  columna), con 1630 columnas por cuadro: 468 de rostro, 33 de pose y 21 por mano. Al
+  graficar un cuadro se ve que la mano queda agrupada cerca de la cara, algo esperable
+  en fingerspelling.
+  
 - TODO (de [02_limpieza_preprocesamiento](../notebooks/02_limpieza_preprocesamiento.ipynb))
 - TODO (de [03_analisis_univariado](../notebooks/03_analisis_univariado.ipynb))
 - TODO (de [04_analisis_bivariado](../notebooks/04_analisis_bivariado.ipynb))
