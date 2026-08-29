@@ -1,6 +1,6 @@
-# Investigación del tema (Actividad 1 de la guía)
+# Investigación del tema (Actividad 1)
 
-**Responsable principal:** Jose Donado
+**Responsable principal:** José Donado
 
 > Archivo independiente — no depende de datos ni de código, se puede avanzar
 > desde el día 1. Sirve de base conceptual para interpretar lo que se
@@ -27,13 +27,6 @@ A diferencia del reconocimiento de señas comunes, el problema es que el deletre
 
 Hay letras similares, así como la M, N y T que agravan la situación. Pero sobre todo, se requiere de una mayor resolución de imagen y fotogramas por segundo para analizar las señales a nivel casi microscópico dado a que no se tiene la forma del cuerpo, sino simplemente de una porción de la mano.
 
-<!-- TODO(equipo): Explicar en qué consiste el fingerspelling dentro del
-lenguaje de señas americano (ASL): quiénes lo usan y para qué (nombres
-propios, palabras sin seña establecida, deletreo de siglas), cómo se compone
-cada letra con la mano, y por qué es un problema distinto al reconocimiento
-
-TODO
-
 ## 2. Cómo se capturan los datos: MediaPipe y landmarks
 
 <!-- TODO(equipo): Investigar cómo funciona MediaPipe Holistic (o el modelo
@@ -45,7 +38,7 @@ se usan landmarks en vez de los frames de video crudos (privacidad, tamaño
 MediaPipe es un marco de trabajo de código abierto de Google que permite aplicar modelos de Inteligencia Artificial para el procesamiento de video en tiempo real.Su principal ventaja es la eficiencia: es tan ligero que puede ejecutarse directamente en dispositivos móviles, páginas web o computadoras sin necesidad de tarjetas gráficas (GPU) de alta potencia.
 
 
-Para entender el movimiento de la mano, MediaPipe utiliza un modelo de DL que detecta una estructura geométrica llamada Hand Landmarks (puntos de referencia).El sistema localiza exactamente 21 puntos tridimensionales (X, Y, Z) en cada mano, distribuidos estratégicamente en las articulaciones clave:Punto 0: La muñeca (origen de la mano). 4 puntos por dedo: Cada uno de los 5 dedos (pulgar, índice, medio, anular y meñique) tiene asignados 4 puntos que corresponden a la base, las articulaciones intermedias y la punta del dedo.
+Gomaa y El-Khoribi (2026) explican que para entender el movimiento de la mano, MediaPipe utiliza un modelo de DL que detecta una estructura geométrica llamada Hand Landmarks (puntos de referencia).El sistema localiza exactamente 21 puntos tridimensionales (X, Y, Z) en cada mano, distribuidos estratégicamente en las articulaciones clave:Punto 0: La muñeca (origen de la mano). 4 puntos por dedo: Cada uno de los 5 dedos (pulgar, índice, medio, anular y meñique) tiene asignados 4 puntos que corresponden a la base, las articulaciones intermedias y la punta del dedo.
 
 
 El flujo de captura de datos se divide en tres etapas continuas que ocurren en milisegundos:
@@ -56,6 +49,22 @@ El flujo de captura de datos se divide en tres etapas continuas que ocurren en m
 Con esto, logra estimar qué tan cerca o lejos está cada articulación respecto a la muñeca (basándose en el tamaño de la mano). Al transformar el video en un flujo continuo de coordenadas numéricas, los algoritmos de IA ya no ven colores ni luces; solo ven un "esqueleto" que se mueve en el tiempo, facilitando el entrenamiento de modelos para identificar las letras del fingerspelling.
 
 ## 3. Técnicas para reconocer patrones en secuencias (landmarks -> texto)
+
+Con el esqueleto se pasa al procesamiento de secuencias de forma continua. Para ello la IA utiliza estas estrategias:
+1. RNN y LSTM (Redes Neuronales Recurrentes)
+RNN son redes que t ienen una "memoria" interna que les permite recordar lo que pasó en fotogramas anteriores. LSTM (Long Short-Term Memory) es la variante más utilizada. Resuelve el problema de las RNN básicas, que olvidan rápidamente la información del pasado. Una LSTM mantiene una "línea de vida" que preserva la información relevante a largo plazo. Luego, la red recibe las coordenadas de la mano fotograma por fotograma. Al procesar la letra actual, la LSTM "recuerda" la posición de la mano un segundo antes. Esto es crucial para detectar la coarticulación (saber si un dedo se está doblando debido a la letra anterior).
+
+2. CNN 1D (Redes Neuronales Convolucionales Unidimensionales)
+Las CNN 1D se aplican sobre datos que se desplazan en una sola dirección temporal.En lugar de buscar patrones visuales en una foto (como ojos o narices), la CNN 1D desliza "filtros" a lo largo de la línea de tiempo de las coordenadas de los landmarks.
+Con ello ya captura micro-movimientos locales muy rápidos. Por ejemplo, identifica la velocidad exacta con la que baja un dedo para formar la letra J. Al ser operaciones matemáticas simples, las CNN 1D son extremadamente rápidas y eficientes para ejecutarse en tiempo real.
+
+3. Transformers (Modelos basados en Atención)
+
+Es la arquitectura de CHATGPT. Los Transformers han reemplazado en gran medida a las LSTM porque no procesan los datos paso a paso, sino que analizan toda la secuencia al mismo tiempo.
+
+Esto permite al modelo calcular matemáticamente qué partes de la secuencia se relacionan más entre sí, sin importar qué tan separadas estén en el tiempo.
+
+El Transformer puede analizar una palabra entera deletreada de corrido. Entiende el contexto global del movimiento y puede corregir errores basándose en las letras vecinas. Si el sistema detecta con un 90% de certeza las letras H-O-U-S- y la última letra está muy distorsionada entre una E y una O, el mecanismo de atención sabrá que contextualmente la palabra más probable en inglés es HOUSE, corrigiendo la salida de texto automáticamente (Al-Qaderi & El-Sabaa, 2026).
 
 <!-- TODO(equipo): Investigar qué técnicas se usan típicamente para este tipo
 de problema de secuencia-a-secuencia / secuencia-a-texto, por ejemplo:
@@ -71,6 +80,9 @@ TODO
 
 ## 4. Referencias
 
-<!-- TODO(equipo): Listar aquí los artículos, posts o documentación de
+Al-Qaderi, M., & El-Sabaa, H. (2026). American Sign Language recognition for alphabets using MediaPipe and LSTM [Reconocimiento de alfabetos en la Lengua de Señas Americana utilizando MediaPipe y LSTM]. ResearchGate. https://www.researchgate.net/publication/366722112_American_Sign_Language_Recognition_for_Alphabets_Using_MediaPipe_and_LSTM
 
-- TODO
+
+Pitsikalis, V., Katsamanis, A., & Maragos, P. (2024). Tracking and recognition of fingerspelling from videos [Seguimiento y reconocimiento de deletreo manual a partir de videos]. University of Thessaly Institutional Repository. https://ir.lib.uth.gr/xmlui/bitstream/handle/11615/59441/25386.pdf
+
+<!-- TODO(equipo): Listar aquí los artículos, posts o documentación de
