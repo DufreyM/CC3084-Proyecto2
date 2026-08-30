@@ -62,8 +62,8 @@ posible es 2 archivos para dos integrantes y 1 archivo para las otras tres:
 | 3 | [notebooks/01_estructura_datos.ipynb](notebooks/01_estructura_datos.ipynb) | Actividad 4a + Descripción de los datos | Leonardo Dufrey Mejía Mejía |
 | 4 | [notebooks/02_limpieza_preprocesamiento.ipynb](notebooks/02_limpieza_preprocesamiento.ipynb) | Actividad 3: limpieza y preprocesamiento | Cindy Mishelle Gualim Perez |
 | 5 | [notebooks/03_analisis_univariado.ipynb](notebooks/03_analisis_univariado.ipynb) | Actividad 4b: resumen numérico y tablas de frecuencia | Daniela Ramírez de León |
-| 6 | [notebooks/04_analisis_bivariado.ipynb](notebooks/04_analisis_bivariado.ipynb) | Actividad 4c: cruce de variables y correlaciones | María José Girón Isidro |
-| 7 | [notebooks/05_visualizaciones.ipynb](notebooks/05_visualizaciones.ipynb) | Actividad 4d: gráficos exploratorios | José Donado |
+| 6 | [notebooks/04_analisis_bivariado.ipynb](notebooks/04_analisis_bivariado.ipynb) | Actividad 4c: cruce de variables y correlaciones | Jose Donado |
+| 7 | [notebooks/05_visualizaciones.ipynb](notebooks/05_visualizaciones.ipynb) | Actividad 4d: gráficos exploratorios | María José Girón |
 | 8 | [docs/03_hallazgos_conclusiones.md](docs/03_hallazgos_conclusiones.md) | Actividad 5: hallazgos y conclusiones | Todo el equipo (al final, una vez cerrados 1-7) |
 
 `src/config.py` y `src/data_loading.py` son utilidades **compartidas** (rutas
