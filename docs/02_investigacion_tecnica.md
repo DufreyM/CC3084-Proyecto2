@@ -75,6 +75,19 @@ Esto permite al modelo calcular matemáticamente qué partes de la secuencia se 
 
 El Transformer puede analizar una palabra entera deletreada de corrido. Entiende el contexto global del movimiento y puede corregir errores basándose en las letras vecinas. Si el sistema detecta con un 90% de certeza las letras H-O-U-S- y la última letra está muy distorsionada entre una E y una O, el mecanismo de atención sabrá que contextualmente la palabra más probable en inglés es HOUSE, corrigiendo la salida de texto automáticamente (Al-Qaderi & El-Sabaa, 2026).
 
+4. CTC (Connectionist Temporal Classification)
+
+Las arquitecturas anteriores producen una salida por fotograma, pero la etiqueta que se tiene es la frase completa: `train.csv` dice que una secuencia corresponde a "3 creekhouse", sin indicar en qué fotograma empieza y termina cada letra. Etiquetar eso a mano sería carísimo, y además el límite entre una letra y la siguiente es difuso porque los dedos ya se están acomodando para la letra que viene.
+
+CTC (Graves et al., 2006) resuelve exactamente ese problema. Agrega un símbolo especial en blanco al alfabeto y, en lugar de exigir una alineación fija, calcula la probabilidad de la frase objetivo sumando todos los alineamientos posibles que colapsan al mismo texto: repeticiones consecutivas de una letra se fusionan y los blancos se descartan. Así, una secuencia de 200 fotogramas puede producir una frase de 12 caracteres sin que nadie haya tenido que marcar dónde termina cada seña. Por eso es la función de pérdida estándar en reconocimiento de voz y de deletreo manual, y es la más usada en las soluciones de esta competencia.
+
+### Normalización y aumentación de los landmarks
+
+Antes de entrenar, las coordenadas se suelen normalizar. Como MediaPipe entrega la posición dentro de la imagen, dos personas que hacen exactamente la misma letra dan números distintos según dónde estén sentadas y qué tan lejos de la cámara. Lo habitual es reexpresar los puntos respecto a un origen anatómico (la muñeca para la mano, o los hombros para el cuerpo) y escalarlos por una distancia de referencia, de modo que el modelo vea la forma de la mano y no su ubicación en el cuadro.
+
+La aumentación de datos busca lo mismo desde otro ángulo: generar variantes plausibles de cada secuencia para que el modelo no se sobreajuste a la forma de grabar de unos pocos participantes. Las transformaciones típicas sobre landmarks son rotaciones, escalados y traslaciones pequeñas, el reflejo especular horizontal (que convierte una seña hecha con la derecha en su equivalente con la izquierda, útil porque en el conjunto hay participantes zurdos y diestros), cambios de velocidad mediante interpolación temporal, y el descarte aleatorio de fotogramas o de puntos, que además imita las no detecciones que ya ocurren de forma natural en los datos.
+
+
 ## 4. Referencias
 
 Al-Qaderi, M., & El-Sabaa, H. (2026). American Sign Language recognition for alphabets using MediaPipe and LSTM [Reconocimiento de alfabetos en la Lengua de Señas Americana utilizando MediaPipe y LSTM]. ResearchGate. https://www.researchgate.net/publication/366722112_American_Sign_Language_Recognition_for_Alphabets_Using_MediaPipe_and_LSTM
