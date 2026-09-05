@@ -93,4 +93,10 @@ La aumentación de datos busca lo mismo desde otro ángulo: generar variantes pl
 Al-Qaderi, M., & El-Sabaa, H. (2026). American Sign Language recognition for alphabets using MediaPipe and LSTM [Reconocimiento de alfabetos en la Lengua de Señas Americana utilizando MediaPipe y LSTM]. ResearchGate. https://www.researchgate.net/publication/366722112_American_Sign_Language_Recognition_for_Alphabets_Using_MediaPipe_and_LSTM
 
 
+Google. (2023). Google — American Sign Language Fingerspelling Recognition [Conjunto de datos]. Kaggle. https://www.kaggle.com/competitions/asl-fingerspelling
+
+Google. (s.f.). Hand landmarks detection guide [Guía de detección de puntos de referencia de la mano]. MediaPipe. https://ai.google.dev/edge/mediapipe/solutions/vision/hand_landmarker
+
+Graves, A., Fernández, S., Gomez, F., & Schmidhuber, J. (2006). Connectionist temporal classification: Labelling unsegmented sequence data with recurrent neural networks [Clasificación temporal conexionista: etiquetado de datos de secuencia no segmentados con redes neuronales recurrentes]. Proceedings of the 23rd International Conference on Machine Learning, 369-376. https://www.cs.toronto.edu/~graves/icml_2006.pdf
+
 Pitsikalis, V., Katsamanis, A., & Maragos, P. (2024). Tracking and recognition of fingerspelling from videos [Seguimiento y reconocimiento de deletreo manual a partir de videos]. University of Thessaly Institutional Repository. https://ir.lib.uth.gr/xmlui/bitstream/handle/11615/59441/25386.pdf
