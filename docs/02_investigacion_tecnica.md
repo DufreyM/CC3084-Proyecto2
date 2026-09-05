@@ -42,6 +42,21 @@ El flujo de captura de datos se divide en tres etapas continuas que ocurren en m
 
 Con esto, logra estimar qué tan cerca o lejos está cada articulación respecto a la muñeca (basándose en el tamaño de la mano). Al transformar el video en un flujo continuo de coordenadas numéricas, los algoritmos de IA ya no ven colores ni luces; solo ven un "esqueleto" que se mueve en el tiempo, facilitando el entrenamiento de modelos para identificar las letras del fingerspelling.
 
+### Por qué hay landmarks faltantes
+
+MediaPipe no devuelve una coordenada por defecto: si el detector no supera su umbral mínimo de confianza para una mano en un fotograma determinado, simplemente no reporta ningún punto y esa fila queda vacía. Las causas más comunes en este tipo de grabaciones son que la mano salga del encuadre (los videos se capturan con la cámara frontal de un teléfono, y el participante no siempre mantiene la mano dentro del cuadro), la oclusión (una mano tapa a la otra o al rostro), el desenfoque por movimiento rápido —recordando que el deletreo va a 5 o 6 letras por segundo— y las condiciones de iluminación.
+
+Esto es importante para el análisis porque los valores faltantes no son un error de captura ni datos corruptos: son ausencia de detección. En la muestra usada en este proyecto, el rostro aparece casi siempre (alrededor del 0.7% de valores faltantes) mientras que la mano derecha falta en más de la mitad de los fotogramas (cerca del 54.5%), o sea que el faltante se concentra justo en la variable más informativa para el deletreo. Por eso no se rellenan con cero, ya que eso ubicaría la mano en el origen de la imagen e introduciría un movimiento que nunca ocurrió; el tratamiento aplicado se documenta en el notebook `02_limpieza_preprocesamiento.ipynb`.
+
+### Por qué se usan landmarks y no los fotogramas de video
+
+La competencia entrega coordenadas y no el video original por cuatro razones:
+
+- **Privacidad:** los landmarks son coordenadas numéricas anónimas. Aunque incluyen puntos del rostro, no permiten reconstruir la imagen ni identificar a las personas que participaron en la grabación.
+- **Tamaño:** aun siendo solo coordenadas, el conjunto completo pesa 158 GB. El video equivalente sería de un orden de magnitud mucho mayor, inviable de distribuir en una competencia abierta.
+- **Costo de cómputo:** al partir de un vector numérico por fotograma, los participantes se saltan por completo la etapa de visión por computadora y pueden concentrarse en el modelado de la secuencia.
+- **Invarianza:** al descartar píxeles se eliminan el fondo, la ropa, la iluminación y el tono de piel, lo que reduce el riesgo de que el modelo aprenda condiciones de grabación en lugar de la forma de la mano.
+
 ## 3. Técnicas para reconocer patrones en secuencias (landmarks -> texto)
 
 Con el esqueleto se pasa al procesamiento de secuencias de forma continua. Para ello la IA utiliza estas estrategias:
