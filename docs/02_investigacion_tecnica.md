@@ -29,12 +29,6 @@ Hay letras similares, así como la M, N y T que agravan la situación. Pero sobr
 
 ## 2. Cómo se capturan los datos: MediaPipe y landmarks
 
-<!-- TODO(equipo): Investigar cómo funciona MediaPipe Holistic (o el modelo
-usado por la competencia) para extraer landmarks de manos, cara y pose a
-partir de video. Explicar qué representa cada landmark (x, y, z), por qué
-puede haber landmarks faltantes (mano fuera de cuadro, oclusión), y por qué
-se usan landmarks en vez de los frames de video crudos (privacidad, tamaño
-
 MediaPipe es un marco de trabajo de código abierto de Google que permite aplicar modelos de Inteligencia Artificial para el procesamiento de video en tiempo real.Su principal ventaja es la eficiencia: es tan ligero que puede ejecutarse directamente en dispositivos móviles, páginas web o computadoras sin necesidad de tarjetas gráficas (GPU) de alta potencia.
 
 
@@ -66,23 +60,9 @@ Esto permite al modelo calcular matemáticamente qué partes de la secuencia se 
 
 El Transformer puede analizar una palabra entera deletreada de corrido. Entiende el contexto global del movimiento y puede corregir errores basándose en las letras vecinas. Si el sistema detecta con un 90% de certeza las letras H-O-U-S- y la última letra está muy distorsionada entre una E y una O, el mecanismo de atención sabrá que contextualmente la palabra más probable en inglés es HOUSE, corrigiendo la salida de texto automáticamente (Al-Qaderi & El-Sabaa, 2026).
 
-<!-- TODO(equipo): Investigar qué técnicas se usan típicamente para este tipo
-de problema de secuencia-a-secuencia / secuencia-a-texto, por ejemplo:
-- Modelos recurrentes (LSTM/GRU) sobre secuencias de landmarks
-- Transformers / attention aplicados a secuencias temporales
-- CTC loss (Connectionist Temporal Classification), muy usado cuando no hay
-  alineación frame-a-caracter exacta (como en este reto)
-- Normalización y aumentación de datos de landmarks (rotación, escala,
-  reflejo especular para manos zurdas/diestras)
-Enfocarse en qué patrones debe aprender el algoritmo (trayectoria de los
-
-TODO
-
 ## 4. Referencias
 
 Al-Qaderi, M., & El-Sabaa, H. (2026). American Sign Language recognition for alphabets using MediaPipe and LSTM [Reconocimiento de alfabetos en la Lengua de Señas Americana utilizando MediaPipe y LSTM]. ResearchGate. https://www.researchgate.net/publication/366722112_American_Sign_Language_Recognition_for_Alphabets_Using_MediaPipe_and_LSTM
 
 
 Pitsikalis, V., Katsamanis, A., & Maragos, P. (2024). Tracking and recognition of fingerspelling from videos [Seguimiento y reconocimiento de deletreo manual a partir de videos]. University of Thessaly Institutional Repository. https://ir.lib.uth.gr/xmlui/bitstream/handle/11615/59441/25386.pdf
-
-<!-- TODO(equipo): Listar aquí los artículos, posts o documentación de
