@@ -23,7 +23,9 @@ relaciones entre variables y outliers (04), y lo que muestran los gráficos
   graficar un cuadro se ve que la mano queda agrupada cerca de la cara, algo esperable
   en fingerspelling.
   
-- TODO (de [02_limpieza_preprocesamiento](../notebooks/02_limpieza_preprocesamiento.ipynb))
+- * **[02_limpieza_preprocesamiento](../notebooks/02_limpieza_preprocesamiento.ipynb):** los datos ya contienen coordenadas normalizadas por MediaPipe, por lo que el principal problema no es la suciedad, sino las detecciones faltantes, estas afectan especialmente a la mano derecha, con ~54.5 % de valores `NaN`, frente a ~0.7 % en el rostro, los faltantes se trataron mediante *forward-fill* dentro de cada secuencia para evitar que la interpolación generara posiciones artificiales entre letras, además, se redujeron las variables de 1630 a 226 columnas eliminando los 468 puntos del rostro, que representan ~86 % de las columnas y aportan poca información al deletreo, finalmente, se excluyeron las secuencias con detección de mano en menos del 10 % de sus cuadros y la muestra resultante se almacenó en `data/processed/`
+
+
 - TODO (de [03_analisis_univariado](../notebooks/03_analisis_univariado.ipynb))
 - TODO (de [04_analisis_bivariado](../notebooks/04_analisis_bivariado.ipynb))
 - TODO (de [05_visualizaciones](../notebooks/05_visualizaciones.ipynb))
