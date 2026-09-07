@@ -32,7 +32,7 @@ Para traducir estos *landmarks* a texto, las arquitecturas de aprendizaje autom�
 
 * **[05_visualizaciones](../notebooks/05_visualizaciones.ipynb)**: las visualizaciones confirmaron que la duración de las secuencias presenta un sesgo hacia la derecha: la mayoría contiene entre 50 y 250 frames, con una mediana global de 147 y algunos valores extremos cercanos a 750. 
 
-También hubieron diferencias importantes entre participantes, cuyas medianas varían aproximadamente entre 75.5 y 241 frames. 
+También hubo diferencias importantes entre participantes, cuyas medianas varían aproximadamente entre 75.5 y 241 frames. 
 
 La longitud de las frases se concentra entre 10 y 30 caracteres, con una moda marcada de 12, y mantiene una correlación positiva moderada con la cantidad de frames ((r \approx 0.602)). 
 
