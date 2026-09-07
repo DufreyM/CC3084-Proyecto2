@@ -30,7 +30,16 @@ Para traducir estos *landmarks* a texto, las arquitecturas de aprendizaje autom�
 
   Mediante el método del rango intercuartílico (IQR), se detectaron 28 secuencias atípicas sobre un total de 998, aproximadamente el 3 % de datos atípicos. Los límites estadísticos normales se establecieron entre 0 y 359.4 frames, y entre 0 y 37 caracteres, interpretando los límites inferiores negativos como un tope natural de cero.
 
-* TODO (de [05_visualizaciones](../notebooks/05_visualizaciones.ipynb))
+* **[05_visualizaciones](../notebooks/05_visualizaciones.ipynb)**: las visualizaciones confirmaron que la duración de las secuencias presenta un sesgo hacia la derecha: la mayoría contiene entre 50 y 250 frames, con una mediana global de 147 y algunos valores extremos cercanos a 750. 
+
+También hubieron diferencias importantes entre participantes, cuyas medianas varían aproximadamente entre 75.5 y 241 frames. 
+
+La longitud de las frases se concentra entre 10 y 30 caracteres, con una moda marcada de 12, y mantiene una correlación positiva moderada con la cantidad de frames ((r \approx 0.602)). 
+
+Además, la frecuencia de caracteres está desbalanceada: predominan letras como e y a, mientras que j, z y varios símbolos cuentan con pocas observaciones. 
+
+En conjunto, estos resultados indican que un futuro modelo deberá aceptar secuencias de longitud variable, considerar las diferencias de velocidad entre participantes y prestar especial atención a los caracteres menos frecuentes.
+
 
 ## Problemas de calidad de datos encontrados
 
