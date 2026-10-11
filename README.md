@@ -42,7 +42,19 @@ CC3084-Proyecto2/
 └── README.md
 ```
 
-## Plan de trabajo y asignaciones
+## Proyecto 2: Resultados (entrega 19 de octubre de 2026)
+
+El plan, los TODOs por integrante y el contrato entre partes están en
+[docs/plan_resultados.md](docs/plan_resultados.md). Para empezar a modelar:
+
+```bash
+pip install -r requirements.txt
+python -m src.dataset   # crea data/processed/secuencias_modelado.npz (usa data/split.json)
+```
+
+Luego seguir la plantilla de [notebooks/06_preparacion_modelado.ipynb](notebooks/06_preparacion_modelado.ipynb).
+
+## Plan de trabajo y asignaciones (fase de EDA, cerrada)
 
 Cada tarea vive en un archivo independiente (notebook o markdown) para que cada
 integrante pueda avanzar y **commitear su parte sin generar conflictos** con
