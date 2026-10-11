@@ -1,5 +1,7 @@
 """Loop de entrenamiento comun con CTC para que todos los modelos sean comparables."""
 import copy
+import importlib
+import json
 import random
 import time
 
@@ -7,7 +9,10 @@ import numpy as np
 import torch
 from torch import nn
 
-from . import metrics, vocab
+from . import config, metrics, vocab
+
+MODELS_DIR = config.ROOT_DIR / "models"
+METRICS_DIR = config.ROOT_DIR / "reports" / "metrics"
 
 
 def fijar_semilla(semilla: int = 42):
@@ -91,3 +96,57 @@ def fit(model: nn.Module, train_dl, val_dl, config: dict | None = None) -> dict:
         "tiempo_entrenamiento_s": time.perf_counter() - inicio,
         "config": cfg,
     }
+
+
+def n_parametros(model: nn.Module) -> int:
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+
+def guardar_resultados(nombre: str, model: nn.Module, hiperparametros: dict, resultado_fit: dict, loaders: dict) -> dict:
+    """Evalua en val/test y guarda models/<nombre>.pt y reports/metrics/<nombre>.json."""
+    device = dispositivo()
+    val = evaluar(model, loaders["val"], device)
+    inicio = time.perf_counter()
+    test = evaluar(model, loaders["test"], device)
+    ms_por_secuencia = 1000 * (time.perf_counter() - inicio) / max(len(test["refs"]), 1)
+
+    ds_test = loaders["test"].dataset
+    ids_test = ds_test.cache["sequence_id"][ds_test.idx].tolist()
+    reporte = {
+        "modelo": nombre,
+        "cer_val": val["cer"],
+        "cer_test": test["cer"],
+        "score_kaggle_test": metrics.score_kaggle(test["refs"], test["hyps"]),
+        "cer_por_caracter": metrics.error_por_caracter(test["refs"], test["hyps"]),
+        "historial": resultado_fit["historial"],
+        "epocas": resultado_fit["epocas"],
+        "tiempo_entrenamiento_s": resultado_fit["tiempo_entrenamiento_s"],
+        "ms_por_secuencia": ms_por_secuencia,
+        "n_parametros": n_parametros(model),
+        "hiperparametros": hiperparametros,
+        "config_entrenamiento": resultado_fit["config"],
+        "dispositivo": str(device),
+        "predicciones_test": [
+            {"sequence_id": sid, "real": r, "predicha": h} for sid, r, h in zip(ids_test, test["refs"], test["hyps"])
+        ],
+    }
+
+    MODELS_DIR.mkdir(parents=True, exist_ok=True)
+    METRICS_DIR.mkdir(parents=True, exist_ok=True)
+    torch.save(
+        {"modelo": nombre, "hiperparametros": hiperparametros, "state_dict": model.cpu().state_dict()},
+        MODELS_DIR / f"{nombre}.pt",
+    )
+    with open(METRICS_DIR / f"{nombre}.json", "w", encoding="utf-8") as f:
+        json.dump(reporte, f, ensure_ascii=False, indent=2)
+    print(f"{nombre}: CER val {val['cer']:.3f} | CER test {test['cer']:.3f} | {ms_por_secuencia:.1f} ms/secuencia")
+    return reporte
+
+
+def cargar_modelo(nombre: str) -> nn.Module:
+    """Reconstruye un modelo guardado con src/models/<nombre>.py y sus pesos."""
+    ckpt = torch.load(MODELS_DIR / f"{nombre}.pt", map_location="cpu")
+    modulo = importlib.import_module(f"src.models.{nombre}")
+    model = modulo.construir(**ckpt["hiperparametros"])
+    model.load_state_dict(ckpt["state_dict"])
+    return model.eval()
