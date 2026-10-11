@@ -2,8 +2,11 @@
 import json
 
 import numpy as np
+import torch
+from torch.nn.utils.rnn import pad_sequence
+from torch.utils.data import DataLoader, Dataset
 
-from . import config, features
+from . import config, features, vocab
 from . import data_loading as dl
 
 CACHE_PATH = config.DATA_PROCESSED_DIR / "secuencias_modelado.npz"
@@ -74,6 +77,53 @@ def indices_de(cache: dict, particion: str, split: dict | None = None) -> np.nda
     """Posiciones en la cache de las secuencias de una particion (train/val/test)."""
     split = split or cargar_split()
     return np.flatnonzero(np.isin(cache["participant_id"], split[particion]))
+
+
+class LandmarkDataset(Dataset):
+    """Devuelve (x (T, F), etiqueta) de una particion; transform recibe y devuelve x."""
+
+    def __init__(self, cache: dict, particion: str, max_frames: int = 384, transform=None):
+        self.cache = cache
+        self.idx = indices_de(cache, particion)
+        self.max_frames = max_frames
+        self.transform = transform
+
+    def __len__(self):
+        return len(self.idx)
+
+    def secuencia(self, i: int) -> np.ndarray:
+        j = self.idx[i]
+        ini, fin = self.cache["offsets"][j], self.cache["offsets"][j + 1]
+        return self.cache["X"][ini:fin].astype(np.float32)
+
+    def __getitem__(self, i):
+        x = self.secuencia(i)
+        if self.transform is not None:
+            x = self.transform(x)
+        x = features.submuestrear(x, self.max_frames)
+        y = vocab.encode(self.cache["phrase"][self.idx[i]])
+        return torch.from_numpy(np.ascontiguousarray(x)), torch.tensor(y, dtype=torch.long)
+
+
+def collate_ctc(batch):
+    """Padding a (B, T, F) y etiquetas (B, L) con sus longitudes."""
+    xs, ys = zip(*batch)
+    x_len = torch.tensor([len(x) for x in xs])
+    y_len = torch.tensor([len(y) for y in ys])
+    return pad_sequence(xs, batch_first=True), x_len, pad_sequence(ys, batch_first=True), y_len
+
+
+def crear_dataloaders(batch_size: int = 32, max_frames: int = 384, transform=None, num_workers: int = 0) -> dict:
+    """DataLoaders de train (con transform y shuffle), val y test."""
+    cache = cargar_cache()
+    loaders = {}
+    for particion in ("train", "val", "test"):
+        es_train = particion == "train"
+        ds = LandmarkDataset(cache, particion, max_frames, transform if es_train else None)
+        loaders[particion] = DataLoader(
+            ds, batch_size=batch_size, shuffle=es_train, collate_fn=collate_ctc, num_workers=num_workers
+        )
+    return loaders
 
 
 if __name__ == "__main__":
