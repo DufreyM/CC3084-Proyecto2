@@ -20,13 +20,15 @@ separados por participante.
 
 ## Dependencias: ¿quién puede trabajar ya?
 
-La única dependencia fuerte es la **parte inicial** (datos para modelado + loop de entrenamiento),
-que la hace Leonardo primero para liberar a todos. Mientras tanto:
+La única dependencia fuerte era la **parte inicial** (datos para modelado + loop de entrenamiento).
+**Ya está lista** (Leonardo, 10 oct): todos pueden trabajar en paralelo. Para empezar:
+`git pull`, `pip install -r requirements.txt`, correr `notebooks/06_preparacion_modelado.ipynb`
+(o `python -m src.dataset`) y seguir la plantilla de la sección 3 de ese notebook.
 
 | Tarea | ¿Depende de algo? |
 |-------|-------------------|
-| Arquitectura de cada modelo (`nn.Module`) | No: se prueba con tensores falsos `(B, T, 227)` |
-| Entrenar y tunear modelos | Sí: `src/dataset.py` + `src/train.py` |
+| Arquitectura de cada modelo (`nn.Module`) | No |
+| Entrenar y tunear modelos | ~~`src/dataset.py` + `src/train.py`~~ **listo**: ya se puede entrenar |
 | Aumentación (Cindy) | No: funciones sobre arrays `(T, F)` |
 | Página de exploración de datos (José) | No: usa `data/processed` del EDA y `train.csv` |
 | Páginas de predicción y rendimiento (María José) | Solo del formato del JSON de métricas (abajo); se puede maquetar con un JSON falso |
@@ -38,6 +40,8 @@ que la hace Leonardo primero para liberar a todos. Mientras tanto:
 - **Entrada al modelo** (`src/dataset.py`, Leonardo): tensor `(T, F)` por secuencia con landmarks de manos +
   pose normalizados respecto a la muñeca, más máscara de detección; etiqueta = índices de
   `character_to_prediction_index.json` (+1, el 0 es el blank de CTC).
+- **Cada modelo vive en `src/models/<nombre>.py`** con su clase y una función `construir(**hiperparametros)`,
+  para que la app lo pueda reconstruir (no dejen la clase solo dentro del notebook).
 - **Interfaz de los modelos:** `forward(x, x_len) -> (log_probs (B, T', C), out_len)` con
   `log_softmax` aplicado y `C = vocab.NUM_CLASSES`.
 - **Entrenamiento** (`src/train.py`, Leonardo): `fit(model, train_dl, val_dl, config)` con `nn.CTCLoss`,
@@ -49,15 +53,22 @@ que la hace Leonardo primero para liberar a todos. Mientras tanto:
     `hiperparametros`, `predicciones_test` (frase real vs predicha).
 - La app y el notebook de comparación **solo leen** esos archivos.
 
+## Notas para entrenar
+
+- En CPU, un modelo pequeño tarda ~20-25 s por época; para tunear conviene Colab o Kaggle con GPU (`train.py` usa CUDA si existe).
+- Las primeras épocas dan CER ≈ 1.0 porque CTC empieza prediciendo solo blanks; es normal, hay que esperar.
+- Solo hay 1,315 secuencias de entrenamiento: usen dropout y la aumentación de Cindy, y no esperen CER cercanos a los de Kaggle.
+- Si el modelo reduce el tiempo con stride, verifiquen que `out_len` >= largo de la frase, o CTC no puede alinear.
+
 ## TODOs por integrante
 
 ### Leonardo – Parte inicial (bloquea a todos) + modelo principal + integración del informe
-- [ ] `src/vocab.py`, `src/features.py`, `src/dataset.py`: normalizar respecto a la muñeca, máscara de detección, forward-fill, submuestreo de secuencias largas, caché en `data/processed`.
-- [ ] Split **por participante** train / val / test en `data/processed/split.json` (la muestra tiene 1,997 secuencias de 92 participantes).
-- [ ] `src/metrics.py` y `src/train.py`: CTC loss, decodificación greedy, CER, error por carácter, early stopping, semilla fija, guardado del JSON de métricas.
-- [ ] `notebooks/06_preparacion_modelado.ipynb`: genera la caché y el split, y muestra cómo usarlos.
-- [ ] Framework: PyTorch, en `requirements.txt`.
-- [ ] `notebooks/07_modelo_cnn_bigru.ipynb`: CNN 1D con stride + BiGRU + CTC; tuning (stride, capas, hidden, dropout, lr).
+- [x] `src/vocab.py`, `src/features.py`, `src/dataset.py`: normalizar respecto a la muñeca, máscara de detección, forward-fill, submuestreo de secuencias largas, caché en `data/processed`.
+- [x] Split **por participante** en `data/split.json` (versionado): 64 / 14 / 14 participantes → 1,315 / 295 / 268 secuencias.
+- [x] `src/metrics.py` y `src/train.py`: CTC loss, decodificación greedy, CER, error por carácter, early stopping, semilla fija, guardado del JSON de métricas.
+- [x] `notebooks/06_preparacion_modelado.ipynb`: genera la caché y el split, y muestra cómo usarlos.
+- [x] Framework: PyTorch, en `requirements.txt`.
+- [ ] `src/models/cnn_bigru.py` + `notebooks/07_modelo_cnn_bigru.ipynb`: CNN 1D con stride + BiGRU + CTC; tuning (stride, capas, hidden, dropout, lr).
 - [ ] Informe: integración final (`reports/build_informe.py` → PDF) y carpeta de Google Drive.
 
 ### Cindy – Aumentación + preprocesamiento de la app + marco teórico
@@ -66,18 +77,18 @@ que la hace Leonardo primero para liberar a todos. Mientras tanto:
 - [ ] Informe: **Marco teórico** (adaptar la revisión bibliográfica del Avance 2 + MediaPipe/landmarks), **Metodología** (pasos, split, herramientas y cómputo) y **Referencias APA**.
 
 ### Daniela – Línea base + comparación de modelos
-- [ ] `notebooks/08_modelo_lstm.ipynb`: LSTM unidireccional + CTC (línea base) y GRU unidireccional (ablación); tuning básico.
+- [ ] `src/models/lstm.py` (+ `gru.py`) + `notebooks/08_modelo_lstm.ipynb`: LSTM unidireccional + CTC (línea base) y GRU unidireccional (ablación); tuning básico.
 - [ ] `notebooks/11_comparacion_modelos.ipynb`: leer `reports/metrics/*.json` y comparar CER, tiempo de entrenamiento, ms por secuencia y n.º de parámetros.
 - [ ] Al menos **3 visualizaciones estáticas** en `reports/figures/` (p. ej. CER por modelo, curvas de entrenamiento, error por carácter / matriz de confusión de letras M-N-T).
 - [ ] Informe: **Resultados y análisis** – ajuste de parámetros y comparación de algoritmos.
 
 ### José – BiLSTM + exploración de datos en la app
-- [ ] `notebooks/09_modelo_bilstm.ipynb`: BiLSTM + CTC; tuning comparable al de la BiGRU.
+- [ ] `src/models/bilstm.py` + `notebooks/09_modelo_bilstm.ipynb`: BiLSTM + CTC; tuning comparable al de la BiGRU.
 - [ ] `app/pages/1_Explorar_datos.py`: explorar las variables del dataset limpio (longitudes, faltantes por mano, frecuencia de caracteres, animación de landmarks de una secuencia). Debe contar la historia del EDA.
 - [ ] Informe: **Introducción** y **Objetivos** (general y específicos, actualizados al modelado) + descripción del dataset original y EDA (reutilizar el informe del Avance 1).
 
 ### María José – Transformer + resultados en la app + presentación
-- [ ] `notebooks/10_modelo_transformer.ipynb`: encoder Transformer pequeño + CTC (submuestreo temporal antes de la atención para secuencias de ~750 cuadros).
+- [ ] `src/models/transformer.py` + `notebooks/10_modelo_transformer.ipynb`: encoder Transformer pequeño + CTC (submuestreo temporal antes de la atención para secuencias de ~750 cuadros).
 - [ ] `app/app.py` (inicio) y `app/pages/2_Predecir.py`: subir/elegir una secuencia, elegir un modelo o todos, mostrar frase predicha vs real.
 - [ ] `app/pages/3_Rendimiento.py`: gráficas **interactivas** de rendimiento en test con opción de **ocultarlas**; paleta coherente (teoría del color).
 - [ ] Presentación final (`reports/build_presentacion.py` o diapositivas nuevas).
