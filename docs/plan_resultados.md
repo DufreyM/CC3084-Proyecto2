@@ -18,6 +18,21 @@ Todos usan **el mismo split, el mismo preprocesamiento y el mismo loop de entren
 para que la comparación sea justa. Métrica principal: **CER** (error por carácter) en validación/test
 separados por participante.
 
+## Qué reutilizamos de la fase 1 (EDA)
+
+No se empieza de cero: el informe y la app de esta fase **amplían** lo del Avance 1.
+
+| De la fase 1 | Se usa en |
+|--------------|-----------|
+| `src/config.py`, `src/data_loading.py` y la muestra fija de 2 parquet | Toda la parte de modelado (`src/features.py`, `src/dataset.py`) |
+| Decisiones de `02_limpieza_preprocesamiento` (quitar rostro, umbral de 10 % de mano, *forward-fill*) | `src/features.py` las aplica igual, ahora por secuencia |
+| Longitudes de `03`/`04` (mediana 147, cola ~750) | `max_frames = 384` y el stride de los modelos |
+| Desbalance de caracteres de `03`/`05` | Error por carácter en `src/metrics.py` y en la comparación |
+| Desbalance de participantes de `01`/`04` | Split por participante |
+| `reports/informe_final.md` (investigación, situación problemática, objetivos, datos, limpieza, EDA) | Base de las secciones del informe final: se actualizan, no se reescriben |
+| `reports/figures/*.png` | Sección de EDA del informe y página de exploración de la app |
+| `reports/build_informe.py` y `build_presentacion.py` | Generar el PDF y la presentación finales (se extienden con las secciones nuevas) |
+
 ## Dependencias: ¿quién puede trabajar ya?
 
 La única dependencia fuerte era la **parte inicial** (datos para modelado + loop de entrenamiento).
