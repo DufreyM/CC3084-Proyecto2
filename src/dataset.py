@@ -40,7 +40,7 @@ def construir_cache(paths=None, destino=CACHE_PATH) -> dict:
     }
     destino.parent.mkdir(parents=True, exist_ok=True)
     np.savez(destino, **cache)
-    print(f"{len(ids)} secuencias guardadas, {descartadas} descartadas -> {destino}")
+    print(f"{len(ids)} secuencias guardadas, {descartadas} descartadas -> {destino.relative_to(config.ROOT_DIR).as_posix()}")
     return cache
 
 
