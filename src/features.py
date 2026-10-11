@@ -51,3 +51,45 @@ def normalizar_pose(pose: np.ndarray) -> np.ndarray:
     hombros = pose[:, [HOMBRO_IZQ, HOMBRO_DER]]
     centrada = pose - hombros.mean(axis=1, keepdims=True)
     return centrada / _escala(np.linalg.norm(hombros[:, 0, :2] - hombros[:, 1, :2], axis=-1))
+
+
+UMBRAL_MANO = 0.10  # mismo umbral que 02_limpieza_preprocesamiento
+NUM_FEATURES = sum(n * 3 for n in PUNTOS.values()) + 2
+
+
+def mascara_deteccion(puntos: dict[str, np.ndarray]) -> np.ndarray:
+    """(T, 2): 1 si la mano izquierda / derecha fue detectada en el cuadro."""
+    manos = [puntos["left_hand"], puntos["right_hand"]]
+    return np.stack([~np.isnan(m).all(axis=(1, 2)) for m in manos], axis=1).astype(np.float32)
+
+
+def cobertura_mano(mascara: np.ndarray) -> float:
+    """Proporcion de cuadros con al menos una mano detectada."""
+    return float(mascara.any(axis=1).mean()) if len(mascara) else 0.0
+
+
+def forward_fill(x: np.ndarray) -> np.ndarray:
+    """Rellena NaN con el ultimo cuadro valido; lo que queda al inicio va a 0."""
+    df = pd.DataFrame(x).ffill().fillna(0.0)
+    return df.to_numpy(np.float32)
+
+
+def preprocesar_secuencia(seq_df: pd.DataFrame) -> np.ndarray:
+    """Una secuencia cruda -> (T, NUM_FEATURES) normalizada, sin NaN, con mascara al final."""
+    puntos = a_puntos(seq_df)
+    mascara = mascara_deteccion(puntos)
+    partes = [
+        normalizar_mano(puntos["left_hand"]),
+        normalizar_mano(puntos["right_hand"]),
+        normalizar_pose(puntos["pose"]),
+    ]
+    coords = np.concatenate([p.reshape(len(mascara), -1) for p in partes], axis=1)
+    return np.concatenate([forward_fill(coords), mascara], axis=1)
+
+
+def submuestrear(x: np.ndarray, max_frames: int) -> np.ndarray:
+    """Si la secuencia es mas larga que max_frames, toma cuadros equiespaciados."""
+    if len(x) <= max_frames:
+        return x
+    idx = np.linspace(0, len(x) - 1, max_frames).round().astype(int)
+    return x[idx]
