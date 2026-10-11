@@ -18,11 +18,28 @@ Todos usan **el mismo split, el mismo preprocesamiento y el mismo loop de entren
 para que la comparación sea justa. Métrica principal: **CER** (error por carácter) en validación/test
 separados por participante.
 
+## Dependencias: ¿quién puede trabajar ya?
+
+La única dependencia fuerte es la **parte inicial** (datos para modelado + loop de entrenamiento),
+que la hace Leonardo primero para liberar a todos. Mientras tanto:
+
+| Tarea | ¿Depende de algo? |
+|-------|-------------------|
+| Arquitectura de cada modelo (`nn.Module`) | No: se prueba con tensores falsos `(B, T, 227)` |
+| Entrenar y tunear modelos | Sí: `src/dataset.py` + `src/train.py` |
+| Aumentación (Cindy) | No: funciones sobre arrays `(T, F)` |
+| Página de exploración de datos (José) | No: usa `data/processed` del EDA y `train.csv` |
+| Páginas de predicción y rendimiento (María José) | Solo del formato del JSON de métricas (abajo); se puede maquetar con un JSON falso |
+| Comparación y figuras (Daniela) | Del formato del JSON; datos reales a partir del jueves 15 |
+| Secciones del informe | No |
+
 ## Contrato entre partes (leer antes de empezar)
 
-- **Entrada al modelo** (`src/dataset.py`, Cindy): tensor `(T, F)` por secuencia con landmarks de manos +
+- **Entrada al modelo** (`src/dataset.py`, Leonardo): tensor `(T, F)` por secuencia con landmarks de manos +
   pose normalizados respecto a la muñeca, más máscara de detección; etiqueta = índices de
-  `character_to_prediction_index.json`.
+  `character_to_prediction_index.json` (+1, el 0 es el blank de CTC).
+- **Interfaz de los modelos:** `forward(x, x_len) -> (log_probs (B, T', C), out_len)` con
+  `log_softmax` aplicado y `C = vocab.NUM_CLASSES`.
 - **Entrenamiento** (`src/train.py`, Leonardo): `fit(model, train_dl, val_dl, config)` con `nn.CTCLoss`,
   decodificación greedy y CER en `src/metrics.py`.
 - **Cada modelo guarda:**
@@ -34,20 +51,19 @@ separados por participante.
 
 ## TODOs por integrante
 
-### Cindy – Datos para modelado + preprocesamiento de la app
-- [ ] `notebooks/06_preparacion_modelado.ipynb` + `src/dataset.py`: normalizar respecto a la muñeca, máscara de detección, forward-fill, recorte/padding de longitud.
-- [ ] Split **por participante** train / val / test; guardar ids en `data/processed/split.json`. Revisar cuántos participantes hay en la muestra de 2 parquet y, si son muy pocos, proponer bajar más archivos.
-- [ ] Aumentación simple (descarte aleatorio de cuadros/puntos, ruido) como opción en el `Dataset`.
-- [ ] `app/preprocess.py`: misma función de preprocesamiento para un parquet/secuencia nueva subida en la app (el usuario no debe notar nada).
-- [ ] Informe: **Metodología** – selección de conjuntos de entrenamiento y prueba, preprocesamiento.
-- [ ] **Prioridad: tener `src/dataset.py` y el split listos el domingo 11**, el resto depende de esto.
-
-### Leonardo – Loop de entrenamiento + modelo principal + integración del informe
-- [ ] `src/train.py` y `src/metrics.py`: CTC loss, decodificación greedy, CER, guardado del JSON de métricas, early stopping, semilla fija.
+### Leonardo – Parte inicial (bloquea a todos) + modelo principal + integración del informe
+- [ ] `src/vocab.py`, `src/features.py`, `src/dataset.py`: normalizar respecto a la muñeca, máscara de detección, forward-fill, submuestreo de secuencias largas, caché en `data/processed`.
+- [ ] Split **por participante** train / val / test en `data/processed/split.json` (la muestra tiene 1,997 secuencias de 92 participantes).
+- [ ] `src/metrics.py` y `src/train.py`: CTC loss, decodificación greedy, CER, error por carácter, early stopping, semilla fija, guardado del JSON de métricas.
+- [ ] `notebooks/06_preparacion_modelado.ipynb`: genera la caché y el split, y muestra cómo usarlos.
+- [ ] Framework: PyTorch, en `requirements.txt`.
 - [ ] `notebooks/07_modelo_cnn_bigru.ipynb`: CNN 1D con stride + BiGRU + CTC; tuning (stride, capas, hidden, dropout, lr).
-- [ ] Definir framework (propuesta: PyTorch) y actualizar `requirements.txt`.
-- [ ] Informe: **Marco teórico** (adaptar la revisión bibliográfica del Avance 2), **Referencias APA** e integración final (`reports/build_informe.py` → PDF).
-- [ ] Crear la carpeta de Google Drive del informe y compartir el link.
+- [ ] Informe: integración final (`reports/build_informe.py` → PDF) y carpeta de Google Drive.
+
+### Cindy – Aumentación + preprocesamiento de la app + marco teórico
+- [ ] `src/augment.py`: descarte aleatorio de cuadros y de puntos, ruido, escala/rotación leve, cambio de velocidad. Se pasa como `transform` a `LandmarkDataset`.
+- [ ] `app/preprocess.py`: preprocesar un parquet/secuencia nueva subida en la app con `src.features` (el usuario no debe notar nada).
+- [ ] Informe: **Marco teórico** (adaptar la revisión bibliográfica del Avance 2 + MediaPipe/landmarks), **Metodología** (pasos, split, herramientas y cómputo) y **Referencias APA**.
 
 ### Daniela – Línea base + comparación de modelos
 - [ ] `notebooks/08_modelo_lstm.ipynb`: LSTM unidireccional + CTC (línea base) y GRU unidireccional (ablación); tuning básico.
@@ -75,7 +91,7 @@ separados por participante.
 
 | Fecha | Meta |
 |-------|------|
-| Sáb 10 – Dom 11 oct | `src/dataset.py`, split y `src/train.py` listos. El resto escribe la arquitectura de su modelo y el esqueleto de la app con datos falsos. |
+| Sáb 10 – Dom 11 oct | Leonardo sube `src/dataset.py`, split y `src/train.py`. El resto escribe la arquitectura de su modelo, la aumentación y el esqueleto de la app con datos falsos. |
 | Lun 12 – Mié 14 oct | Entrenar y tunear los 4 modelos. App leyendo JSON de prueba. |
 | Jue 15 oct | **Congelar** `models/*.pt` y `reports/metrics/*.json`. |
 | Vie 16 oct | Notebook de comparación + figuras estáticas. App conectada a modelos reales. |
@@ -93,5 +109,5 @@ app/                      # Streamlit
 models/                   # pesos entrenados (*.pt)
 notebooks/06..11_*.ipynb
 reports/metrics/*.json    # métricas por modelo
-src/dataset.py, train.py, metrics.py
+src/vocab.py, features.py, dataset.py, metrics.py, train.py, augment.py
 ```
