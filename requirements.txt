@@ -8,3 +8,4 @@ scikit-learn
 jupyter
 kaggle
 tqdm
+torch
