@@ -83,7 +83,8 @@ La única dependencia fuerte era la **parte inicial** (datos para modelado + loo
 - [x] `src/metrics.py` y `src/train.py`: CTC loss, decodificación greedy, CER, error por carácter, early stopping, semilla fija, guardado del JSON de métricas.
 - [x] `notebooks/06_preparacion_modelado.ipynb`: genera la caché y el split, y muestra cómo usarlos.
 - [x] Framework: PyTorch, en `requirements.txt`.
-- [ ] `src/models/cnn_bigru.py` + `notebooks/07_modelo_cnn_bigru.ipynb`: CNN 1D con stride + BiGRU + CTC; tuning (stride, capas, hidden, dropout, lr).
+- [x] `src/models/cnn_bigru.py` + `notebooks/07_modelo_cnn_bigru.ipynb`: CNN 1D con stride + BiGRU + CTC; tuning de 4 variantes. **CER test 0.490**, guardado en `models/cnn_bigru.pt` y `reports/metrics/cnn_bigru.json` (sirve de ejemplo del formato para la app y la comparación).
+- [x] `docs/05_modelo_cnn_bigru.md`: sección del modelo principal para el informe (justificación, ajuste y resultados).
 - [ ] Informe: integración final (`reports/build_informe.py` → PDF) y carpeta de Google Drive.
 
 ### Cindy – Aumentación + preprocesamiento de la app + marco teórico
