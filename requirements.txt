@@ -9,3 +9,6 @@ jupyter
 kaggle
 tqdm
 torch
+streamlit
+plotly
+python-pptx
