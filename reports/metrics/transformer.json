@@ -1,0 +1,2245 @@
+{
+  "modelo": "transformer",
+  "cer_val": 0.5842075147816136,
+  "cer_test": 0.4991485738612175,
+  "score_kaggle_test": 0.5008514261387824,
+  "cer_por_caracter": {
+    "por_caracter": {
+      "b": {
+        "total": 46,
+        "errores": 19,
+        "tasa": 0.41304347826086957
+      },
+      "u": {
+        "total": 76,
+        "errores": 46,
+        "tasa": 0.6052631578947368
+      },
+      "g": {
+        "total": 53,
+        "errores": 28,
+        "tasa": 0.5283018867924528
+      },
+      "s": {
+        "total": 165,
+        "errores": 72,
+        "tasa": 0.43636363636363634
+      },
+      ".": {
+        "total": 93,
+        "errores": 52,
+        "tasa": 0.5591397849462365
+      },
+      "l": {
+        "total": 143,
+        "errores": 72,
+        "tasa": 0.5034965034965035
+      },
+      "a": {
+        "total": 274,
+        "errores": 100,
+        "tasa": 0.36496350364963503
+      },
+      "n": {
+        "total": 177,
+        "errores": 70,
+        "tasa": 0.3954802259887006
+      },
+      "c": {
+        "total": 121,
+        "errores": 42,
+        "tasa": 0.34710743801652894
+      },
+      "h": {
+        "total": 97,
+        "errores": 34,
+        "tasa": 0.35051546391752575
+      },
+      "p": {
+        "total": 84,
+        "errores": 67,
+        "tasa": 0.7976190476190477
+      },
+      "d": {
+        "total": 102,
+        "errores": 63,
+        "tasa": 0.6176470588235294
+      },
+      "e": {
+        "total": 271,
+        "errores": 112,
+        "tasa": 0.4132841328413284
+      },
+      "t": {
+        "total": 187,
+        "errores": 113,
+        "tasa": 0.6042780748663101
+      },
+      "m": {
+        "total": 88,
+        "errores": 45,
+        "tasa": 0.5113636363636364
+      },
+      "i": {
+        "total": 193,
+        "errores": 79,
+        "tasa": 0.40932642487046633
+      },
+      "r": {
+        "total": 222,
+        "errores": 107,
+        "tasa": 0.481981981981982
+      },
+      "y": {
+        "total": 43,
+        "errores": 26,
+        "tasa": 0.6046511627906976
+      },
+      "o": {
+        "total": 217,
+        "errores": 120,
+        "tasa": 0.5529953917050692
+      },
+      "3": {
+        "total": 127,
+        "errores": 36,
+        "tasa": 0.28346456692913385
+      },
+      "2": {
+        "total": 139,
+        "errores": 74,
+        "tasa": 0.5323741007194245
+      },
+      "0": {
+        "total": 111,
+        "errores": 58,
+        "tasa": 0.5225225225225225
+      },
+      "-": {
+        "total": 216,
+        "errores": 98,
+        "tasa": 0.4537037037037037
+      },
+      "9": {
+        "total": 105,
+        "errores": 36,
+        "tasa": 0.34285714285714286
+      },
+      "7": {
+        "total": 121,
+        "errores": 57,
+        "tasa": 0.47107438016528924
+      },
+      "8": {
+        "total": 101,
+        "errores": 39,
+        "tasa": 0.38613861386138615
+      },
+      "6": {
+        "total": 114,
+        "errores": 39,
+        "tasa": 0.34210526315789475
+      },
+      "w": {
+        "total": 122,
+        "errores": 68,
+        "tasa": 0.5573770491803278
+      },
+      "x": {
+        "total": 9,
+        "errores": 9,
+        "tasa": 1.0
+      },
+      "f": {
+        "total": 39,
+        "errores": 19,
+        "tasa": 0.48717948717948717
+      },
+      "4": {
+        "total": 118,
+        "errores": 40,
+        "tasa": 0.3389830508474576
+      },
+      " ": {
+        "total": 233,
+        "errores": 165,
+        "tasa": 0.7081545064377682
+      },
+      "/": {
+        "total": 73,
+        "errores": 37,
+        "tasa": 0.5068493150684932
+      },
+      "1": {
+        "total": 129,
+        "errores": 74,
+        "tasa": 0.5736434108527132
+      },
+      "5": {
+        "total": 120,
+        "errores": 37,
+        "tasa": 0.30833333333333335
+      },
+      "k": {
+        "total": 42,
+        "errores": 24,
+        "tasa": 0.5714285714285714
+      },
+      "j": {
+        "total": 21,
+        "errores": 16,
+        "tasa": 0.7619047619047619
+      },
+      "+": {
+        "total": 37,
+        "errores": 20,
+        "tasa": 0.5405405405405406
+      },
+      "z": {
+        "total": 15,
+        "errores": 15,
+        "tasa": 1.0
+      },
+      "q": {
+        "total": 10,
+        "errores": 10,
+        "tasa": 1.0
+      },
+      "v": {
+        "total": 24,
+        "errores": 9,
+        "tasa": 0.375
+      },
+      ":": {
+        "total": 13,
+        "errores": 11,
+        "tasa": 0.8461538461538461
+      },
+      "_": {
+        "total": 6,
+        "errores": 6,
+        "tasa": 1.0
+      },
+      ",": {
+        "total": 1,
+        "errores": 1,
+        "tasa": 1.0
+      }
+    },
+    "confusiones": {
+      " -><borrado>": 128,
+      "t-><borrado>": 92,
+      "e-><borrado>": 90,
+      "o-><borrado>": 78,
+      "r-><borrado>": 76,
+      "a-><borrado>": 68,
+      "--><borrado>": 65,
+      "i-><borrado>": 58,
+      "l-><borrado>": 57,
+      "s-><borrado>": 54,
+      "w-><borrado>": 53,
+      "n-><borrado>": 51,
+      "p-><borrado>": 50,
+      "1-><borrado>": 48,
+      "2-><borrado>": 42,
+      "d-><borrado>": 40,
+      ".-><borrado>": 39,
+      "7-><borrado>": 37,
+      "0-><borrado>": 35,
+      "6-><borrado>": 32,
+      "8-><borrado>": 31,
+      "c-><borrado>": 30,
+      "5-><borrado>": 29,
+      "/-><borrado>": 29,
+      "3-><borrado>": 28,
+      "u-><borrado>": 28,
+      "4-><borrado>": 27,
+      "m-><borrado>": 27,
+      "h-><borrado>": 24,
+      "9-><borrado>": 22,
+      "+-><borrado>": 18,
+      "g-><borrado>": 16,
+      "k-><borrado>": 16,
+      "b-><borrado>": 15,
+      "y-><borrado>": 15,
+      "f-><borrado>": 12,
+      "z-><borrado>": 9,
+      "u->r": 8,
+      "d->o": 7,
+      "2->1": 7,
+      "j->i": 7,
+      ":-><borrado>": 7,
+      "y->i": 7,
+      "x-><borrado>": 6,
+      "a->s": 6,
+      "q-><borrado>": 6,
+      "0->o": 6,
+      "o->s": 6,
+      "r->u": 5,
+      "1->-": 5,
+      "s->a": 5,
+      "o->e": 5,
+      " ->a": 5,
+      "-->t": 5,
+      "v-><borrado>": 5,
+      "j-><borrado>": 5,
+      "9->6": 4,
+      "t->a": 4,
+      "2->v": 4,
+      "e->o": 4,
+      "w->6": 4,
+      "2->6": 4,
+      "g->t": 4,
+      "w->.": 4,
+      "o->m": 4,
+      "m->n": 4,
+      "n->k": 4,
+      "e->s": 4,
+      "o->a": 4,
+      "-->.": 4,
+      "i->j": 4,
+      "o->h": 3,
+      "6-> ": 3,
+      "u-> ": 3,
+      "0->w": 3,
+      "2->r": 3,
+      "i->r": 3,
+      "t->i": 3,
+      "-->0": 3,
+      " ->6": 3,
+      "r->e": 3,
+      "n->r": 3,
+      "c-> ": 3,
+      ".->t": 3,
+      "p->i": 3,
+      "s->e": 3,
+      " ->n": 3,
+      "m->o": 3,
+      "d->e": 3,
+      "a->-": 3,
+      " ->i": 3,
+      "-->4": 3,
+      "a->t": 3,
+      "o->c": 3,
+      "l->o": 3,
+      "a->e": 3,
+      "o->r": 3,
+      "k->r": 3,
+      "l->k": 2,
+      "r->-": 2,
+      " ->c": 2,
+      "r->1": 2,
+      " ->h": 2,
+      "r->a": 2,
+      "r->d": 2,
+      "7->6": 2,
+      "9->4": 2,
+      "2->h": 2,
+      "--> ": 2,
+      "0->l": 2,
+      "-->o": 2,
+      "7->5": 2,
+      "2->7": 2,
+      "7-> ": 2,
+      "3->5": 2,
+      "1->t": 2,
+      "n->e": 2,
+      "c->0": 2,
+      "f->9": 2,
+      "a->n": 2,
+      "1->8": 2,
+      "-->g": 2,
+      "1->5": 2,
+      "7->4": 2,
+      "u->e": 2,
+      "n->a": 2,
+      "n->i": 2,
+      "0-> ": 2,
+      "4->7": 2,
+      "v->s": 2,
+      "e->t": 2,
+      "j->a": 2,
+      "7->1": 2,
+      "7->l": 2,
+      "1-> ": 2,
+      "o->n": 2,
+      " ->-": 2,
+      "o->2": 2,
+      ".->n": 2,
+      "a->y": 2,
+      " ->p": 2,
+      "p-> ": 2,
+      "s->m": 2,
+      "p->e": 2,
+      "4->3": 2,
+      "l->d": 2,
+      "1->7": 2,
+      "1->3": 2,
+      "2->-": 2,
+      "w-> ": 2,
+      "a->o": 2,
+      "d->s": 2,
+      "t->h": 2,
+      "a-> ": 2,
+      "8->3": 2,
+      "r->b": 2,
+      "e->c": 2,
+      "m->h": 2,
+      "-->1": 2,
+      "a->c": 2,
+      "g->o": 2,
+      "t->n": 2,
+      "n->3": 2,
+      " ->r": 2,
+      "r->o": 2,
+      "m->u": 2,
+      "_-><borrado>": 2,
+      "c->a": 2,
+      "i->a": 2,
+      "k->m": 2,
+      "2->9": 2,
+      "r->k": 2,
+      "i->e": 2,
+      "p->h": 2,
+      "l->r": 2,
+      "l->e": 2,
+      "i->+": 1,
+      "f->w": 1,
+      "e->n": 1,
+      "f->c": 1,
+      "g->+": 1,
+      ".->9": 1,
+      "/->6": 1,
+      "t->k": 1,
+      "/->5": 1,
+      "c->o": 1,
+      "k->o": 1,
+      "o->u": 1,
+      "0->4": 1,
+      "n->m": 1,
+      "p->-": 1,
+      "7->2": 1,
+      "-->8": 1,
+      "7->o": 1,
+      "5->i": 1,
+      "9->v": 1,
+      "5->a": 1,
+      "2->a": 1,
+      "k->u": 1,
+      "3->0": 1,
+      "7->0": 1,
+      "9->r": 1,
+      "5->3": 1,
+      " ->w": 1,
+      "1->+": 1,
+      " ->1": 1,
+      "7->-": 1,
+      "5->7": 1,
+      "r->.": 1,
+      "9->l": 1,
+      "3->a": 1,
+      "o->0": 1,
+      "h->2": 1,
+      "z->g": 1,
+      "i->d": 1,
+      "p->c": 1,
+      "a->6": 1,
+      "m->/": 1,
+      "5-> ": 1,
+      "f->a": 1,
+      "x->1": 1,
+      "d->3": 1,
+      "-->5": 1,
+      "-->i": 1,
+      "4->5": 1,
+      "4->w": 1,
+      "g->e": 1,
+      "i->m": 1,
+      "g->v": 1,
+      "t->j": 1,
+      "p->.": 1,
+      " ->u": 1,
+      "d->y": 1,
+      "g->i": 1,
+      "e->g": 1,
+      "6->1": 1,
+      "u->f": 1,
+      "8->2": 1,
+      " ->o": 1,
+      "y->p": 1,
+      "a->p": 1,
+      "7->d": 1,
+      ":->p": 1,
+      ".->r": 1,
+      ":->.": 1,
+      "/->.": 1,
+      ".->h": 1,
+      "h->a": 1,
+      "0->t": 1,
+      "1->s": 1,
+      "a->2": 1,
+      "k->n": 1,
+      "d->k": 1,
+      "0->s": 1,
+      "p->s": 1,
+      ":->h": 1,
+      ".->c": 1,
+      "m->d": 1,
+      ".->-": 1,
+      ":->k": 1,
+      "r->8": 1,
+      "r->3": 1,
+      " ->d": 1,
+      "p->/": 1,
+      "p->g": 1,
+      "o->t": 1,
+      "z->e": 1,
+      "e->x": 1,
+      "_->-": 1,
+      "t->-": 1,
+      "_->a": 1,
+      "f->b": 1,
+      "0->9": 1,
+      "1->0": 1,
+      "6->8": 1,
+      "p->l": 1,
+      "3->+": 1,
+      "2-> ": 1,
+      "5->-": 1,
+      "q->g": 1,
+      "1->9": 1,
+      "9->5": 1,
+      "a->d": 1,
+      "y->r": 1,
+      "h->s": 1,
+      "w->n": 1,
+      " ->v": 1,
+      "0->e": 1,
+      " ->e": 1,
+      "d->c": 1,
+      "c->i": 1,
+      "i->k": 1,
+      "1->.": 1,
+      "0->d": 1,
+      "3->o": 1,
+      "1->d": 1,
+      "9->8": 1,
+      "d->1": 1,
+      "y->-": 1,
+      " ->.": 1,
+      "/->w": 1,
+      "8->9": 1,
+      "2->3": 1,
+      ".->w": 1,
+      "s->.": 1,
+      " ->2": 1,
+      "e->8": 1,
+      "t->g": 1,
+      "b->d": 1,
+      "e->d": 1,
+      "q->m": 1,
+      ".->m": 1,
+      "e->/": 1,
+      "w->r": 1,
+      "s->r": 1,
+      "o->k": 1,
+      "h-> ": 1,
+      " ->8": 1,
+      "y->h": 1,
+      "q->l": 1,
+      "b->4": 1,
+      "3->r": 1,
+      "/->d": 1,
+      "t->c": 1,
+      "h->g": 1,
+      "d->l": 1,
+      "5->b": 1,
+      "8->i": 1,
+      "s->6": 1,
+      "r-> ": 1,
+      "m->s": 1,
+      "z->2": 1,
+      "h->n": 1,
+      "u->h": 1,
+      " ->l": 1,
+      "r->t": 1,
+      "2->+": 1,
+      "w->2": 1,
+      "t->6": 1,
+      "h->9": 1,
+      "9->f": 1,
+      "-->p": 1,
+      "4->c": 1,
+      "7->3": 1,
+      "n->2": 1,
+      "1->g": 1,
+      "d->r": 1,
+      "c->z": 1,
+      "h->y": 1,
+      "-->6": 1,
+      ",-><borrado>": 1,
+      "+->1": 1,
+      "+->6": 1,
+      "4->0": 1,
+      " ->x": 1,
+      "s->/": 1,
+      "i->t": 1,
+      "z->a": 1,
+      "r->n": 1,
+      "b->r": 1,
+      "u->3": 1,
+      "d-> ": 1,
+      "g->k": 1,
+      "x->s": 1,
+      "d->m": 1,
+      "6->o": 1,
+      "n->l": 1,
+      "v->.": 1,
+      "e->i": 1,
+      "0->n": 1,
+      "t->s": 1,
+      "u->p": 1,
+      "o->g": 1,
+      "/->n": 1,
+      "a->i": 1,
+      "q->5": 1,
+      "u->8": 1,
+      "i->3": 1,
+      "t->o": 1,
+      "9->g": 1,
+      "f->r": 1,
+      "s->c": 1,
+      "m->r": 1,
+      "r->c": 1,
+      ".->l": 1,
+      "r->9": 1,
+      "e->r": 1,
+      "-->r": 1,
+      "0->1": 1,
+      "7->9": 1,
+      "-->9": 1,
+      "4->s": 1,
+      "h->3": 1,
+      "m->+": 1,
+      "s->f": 1,
+      "a->l": 1,
+      "b->c": 1,
+      "_-> ": 1,
+      "/->r": 1,
+      "4->a": 1,
+      "i->f": 1,
+      "z->r": 1,
+      "p->0": 1,
+      "d->p": 1,
+      "i->0": 1,
+      "g->1": 1,
+      "o-> ": 1,
+      "d->g": 1,
+      "o->j": 1,
+      "i->y": 1,
+      "t->.": 1,
+      "l->a": 1,
+      "z->t": 1,
+      "o->4": 1,
+      "m->3": 1,
+      "v->2": 1,
+      "-->u": 1,
+      "r->h": 1,
+      "e->b": 1,
+      "n->s": 1,
+      "j->7": 1,
+      "i->n": 1,
+      "l->h": 1,
+      "x->p": 1,
+      "h->1": 1,
+      "s->h": 1,
+      "2->5": 1,
+      "e-> ": 1,
+      "1->h": 1,
+      "0->7": 1,
+      "1->i": 1,
+      "4->t": 1,
+      "-->c": 1,
+      "9->a": 1,
+      "8->b": 1,
+      "-->w": 1,
+      "7->w": 1,
+      "6->u": 1,
+      "5->r": 1,
+      "4->6": 1,
+      "4->/": 1,
+      "j->m": 1,
+      "l->m": 1,
+      "l-> ": 1,
+      "8->0": 1,
+      "o->y": 1,
+      "t->m": 1,
+      "w->d": 1,
+      "0->h": 1,
+      "8->w": 1,
+      " ->y": 1,
+      "2->t": 1,
+      "3->8": 1,
+      "s->-": 1,
+      "_->r": 1,
+      "/->-": 1,
+      "c->b": 1,
+      "w->a": 1,
+      "a->.": 1,
+      "o->7": 1,
+      "c->n": 1,
+      "m->e": 1
+    }
+  },
+  "historial": {
+    "train_loss": [
+      9.844603514218058,
+      4.251490462052958,
+      3.7181476750754583,
+      3.5576466828697986,
+      3.4368034275765655,
+      3.3400703932395905,
+      3.263939458789028,
+      3.195564574796437,
+      3.1470968978939853,
+      3.080025698476871,
+      2.9397862700908357,
+      2.8610241072259477,
+      2.7527768735196654,
+      2.603671838394136,
+      2.4840057282393424,
+      2.3860731987898793,
+      2.2567416145774346,
+      2.16417004110242,
+      2.090941409738345,
+      2.009681565861285,
+      1.9326463241540888,
+      1.875285833054169,
+      1.794888705355133,
+      1.7457703245003413,
+      1.6791634575948968,
+      1.6360339024221036,
+      1.5823244607040636,
+      1.5230265611024865,
+      1.4949852847781018,
+      1.445199156351416,
+      1.3925349569139371,
+      1.3511473548729611,
+      1.3054613127907873,
+      1.2506527956900941,
+      1.2271126721748382,
+      1.1685869667013336,
+      1.13667176349988,
+      1.0893874030602748,
+      1.0608158760197715,
+      1.0266920885205721,
+      0.9852352504494526,
+      0.9691436250853448,
+      0.9387107166500599,
+      0.9078076287367498,
+      0.88225113425418,
+      0.8685424850014226,
+      0.8403702664284651,
+      0.8233250801100931,
+      0.8008431436444416,
+      0.7905021244128847,
+      0.7736372381108795,
+      0.7631517334129421,
+      0.7666871708155585,
+      0.7383763709449043,
+      0.746038773032649,
+      0.7384632785057387,
+      0.7284599536272056,
+      0.7259037854553628,
+      0.7278285681974752,
+      0.7243993041179932
+    ],
+    "val_loss": [
+      5.020840148602502,
+      3.8691970728211484,
+      3.660760916693736,
+      3.6630728010403906,
+      3.529699453256898,
+      3.4982666266166556,
+      3.401343616388612,
+      3.378912957239959,
+      3.3659700927087814,
+      3.317143599461701,
+      3.936338532981226,
+      3.5195240319785426,
+      3.1505297119334594,
+      3.1091421693058336,
+      3.411057726003356,
+      2.9869365975008173,
+      2.8420388043937037,
+      2.8407070014436364,
+      2.7097259561894305,
+      2.8247274770575053,
+      2.7252671233678267,
+      2.7285027487803313,
+      2.5530199172133106,
+      2.6079581058631507,
+      2.692800192913767,
+      2.401722269543147,
+      2.462937281495434,
+      2.623606667276156,
+      2.497124977435096,
+      2.5152677398616983,
+      2.481615165936745,
+      2.517170950517816,
+      2.525017797340781,
+      2.5224674742100603,
+      2.607554612725468,
+      2.5753756005885236,
+      2.6075360904305667,
+      2.5899314993518896,
+      2.631496738983413,
+      2.7177260455438645,
+      2.619597591788082,
+      2.667859483169297,
+      2.683241793260736,
+      2.778629977016126,
+      2.761830406673884,
+      2.7527920335026113,
+      2.7750174255694375,
+      2.804691494117349,
+      2.82661017240104,
+      2.843441677093506,
+      2.8833142183594784,
+      2.8343702607235666,
+      2.8645281500735527,
+      2.8904557486711924,
+      2.873208602000091,
+      2.8634397716845497,
+      2.887182599407131,
+      2.883596675678835,
+      2.88022843861984,
+      2.8706251338376836
+    ],
+    "val_cer": [
+      0.9996185390043868,
+      0.9998092695021934,
+      0.9996185390043868,
+      0.9994278085065802,
+      1.0,
+      0.9967575815372878,
+      0.9975205035285142,
+      0.9988556170131604,
+      0.9959946595460614,
+      0.9963761205416746,
+      0.99046347510967,
+      0.9942780850658021,
+      0.9931337020789625,
+      0.9759679572763685,
+      0.9946595460614153,
+      0.9769216097654014,
+      0.9296204463093649,
+      0.9334350562654968,
+      0.8865153538050734,
+      0.9555597940110624,
+      0.8113675376692733,
+      0.8720198359717719,
+      0.7251573526606905,
+      0.7612054167461377,
+      0.7936296013732596,
+      0.6980736219721534,
+      0.6988365439633798,
+      0.6997901964524127,
+      0.7127598703032615,
+      0.706847224871257,
+      0.6599275224108335,
+      0.6700362387945833,
+      0.6831966431432386,
+      0.6418081251192066,
+      0.6597367919130269,
+      0.6433339691016594,
+      0.6625977493801258,
+      0.6355140186915887,
+      0.6242609193209995,
+      0.6221628838451269,
+      0.6099561319855045,
+      0.6040434865534999,
+      0.5973679191302689,
+      0.6023269120732405,
+      0.6061415220293725,
+      0.5969864581346558,
+      0.6011825290864009,
+      0.595460614152203,
+      0.5927903871829105,
+      0.5897386992180049,
+      0.5939347701697502,
+      0.5960328056456228,
+      0.5943162311653634,
+      0.5889757772267785,
+      0.5891665077245851,
+      0.5893572382223917,
+      0.5864962807552928,
+      0.5903108907114247,
+      0.5966049971390426,
+      0.5842075147816136
+    ]
+  },
+  "epocas": 60,
+  "tiempo_entrenamiento_s": 1068.8693833000143,
+  "ms_por_secuencia": 1.7678582089094779,
+  "n_parametros": 633404,
+  "hiperparametros": {
+    "d_model": 128,
+    "cabezas": 4,
+    "capas": 3,
+    "ff": 256,
+    "stride": 2,
+    "dropout": 0.1
+  },
+  "config_entrenamiento": {
+    "epochs": 60,
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "paciencia": 10,
+    "clip": 1.0,
+    "semilla": 42
+  },
+  "dispositivo": "cpu",
+  "predicciones_test": [
+    {
+      "sequence_id": 1975473601,
+      "real": "bugs.launchpad.net",
+      "predicha": "buslaunhadnet"
+    },
+    {
+      "sequence_id": 1975502450,
+      "real": "mirandasphysiosteps.com",
+      "predicha": "mirandashysiostescom"
+    },
+    {
+      "sequence_id": 1975822043,
+      "real": "320-978-6837",
+      "predicha": "3"
+    },
+    {
+      "sequence_id": 1975996502,
+      "real": "www.exobiologie.info",
+      "predicha": "+nwh"
+    },
+    {
+      "sequence_id": 1976412934,
+      "real": "9834 ochre leaf",
+      "predicha": "9834 oknac"
+    },
+    {
+      "sequence_id": 1977142739,
+      "real": "fada.org.ar/415921",
+      "predicha": "+9a-64152"
+    },
+    {
+      "sequence_id": 1977458664,
+      "real": "footypredictorapp.com/9950",
+      "predicha": "redickorapcom5995"
+    },
+    {
+      "sequence_id": 1977524996,
+      "real": "9052 northeast cackler lane",
+      "predicha": "9052 norheascoacokerane"
+    },
+    {
+      "sequence_id": 1978116724,
+      "real": "525691 north 33rd",
+      "predicha": "5625 61nu1th 3d"
+    },
+    {
+      "sequence_id": 1978198898,
+      "real": "254-034-2266",
+      "predicha": "25-34-26"
+    },
+    {
+      "sequence_id": 1978222004,
+      "real": "690-782-8121",
+      "predicha": "664-281"
+    },
+    {
+      "sequence_id": 1978363875,
+      "real": "3912 north nuhring road",
+      "predicha": "39 norhhn huingrd"
+    },
+    {
+      "sequence_id": 1978426945,
+      "real": "976-614-5723",
+      "predicha": "976--4-72"
+    },
+    {
+      "sequence_id": 1978897448,
+      "real": "sheree henson",
+      "predicha": "ere hnaem"
+    },
+    {
+      "sequence_id": 1979339421,
+      "real": "arthur murphy",
+      "predicha": "akathud-hy"
+    },
+    {
+      "sequence_id": 1979452893,
+      "real": "301-428-9724",
+      "predicha": "3-42-96248"
+    },
+    {
+      "sequence_id": 1979553114,
+      "real": "ocar.tistory.com/",
+      "predicha": "ocr.isterycom/"
+    },
+    {
+      "sequence_id": 1979554520,
+      "real": "jayme peralta",
+      "predicha": "jame eralas"
+    },
+    {
+      "sequence_id": 1979754888,
+      "real": "6519343721",
+      "predicha": "65-1434377h1"
+    },
+    {
+      "sequence_id": 1980395143,
+      "real": "+597-607-0250-9522",
+      "predicha": "28 wo lriwovava"
+    },
+    {
+      "sequence_id": 1980448206,
+      "real": "1596 kitty meyer",
+      "predicha": "96 uritmor"
+    },
+    {
+      "sequence_id": 1980617606,
+      "real": "582-335-7795",
+      "predicha": "582-03005r3"
+    },
+    {
+      "sequence_id": 1980695653,
+      "real": "3276 north 62nd street west",
+      "predicha": "37 66nrthow62dasret6e"
+    },
+    {
+      "sequence_id": 1980961762,
+      "real": "1792 756",
+      "predicha": "+7961-76"
+    },
+    {
+      "sequence_id": 1981133198,
+      "real": "una-historia/1935131",
+      "predicha": "n.iala55t"
+    },
+    {
+      "sequence_id": 1981405668,
+      "real": "745548 road 200h",
+      "predicha": "74548r0a02"
+    },
+    {
+      "sequence_id": 1981491478,
+      "real": "spazioenelpartnergallipoli",
+      "predicha": "sgdocaeeeta"
+    },
+    {
+      "sequence_id": 1981737162,
+      "real": "1588 schoellkopf",
+      "predicha": "180hl9"
+    },
+    {
+      "sequence_id": 1981840325,
+      "real": "armando cunningham",
+      "predicha": "ar6ndocrinn/"
+    },
+    {
+      "sequence_id": 1982249635,
+      "real": "6550 charlie neal rd",
+      "predicha": "65 0 calenard"
+    },
+    {
+      "sequence_id": 1982927413,
+      "real": "91463 fisher ferry exd",
+      "predicha": " haeco13"
+    },
+    {
+      "sequence_id": 1983018744,
+      "real": "851-826-2889",
+      "predicha": "585866-88"
+    },
+    {
+      "sequence_id": 1983068676,
+      "real": "q-stary-silnik-spalinowy",
+      "predicha": "gsaryisilnikplinwyi"
+    },
+    {
+      "sequence_id": 1983227081,
+      "real": "980125 greencreek circle",
+      "predicha": "9025 rcek cile"
+    },
+    {
+      "sequence_id": 1983470676,
+      "real": "+30-807-875-104",
+      "predicha": "300807-875-104"
+    },
+    {
+      "sequence_id": 1983498374,
+      "real": "14746 iron gun",
+      "predicha": "554w  ironeen"
+    },
+    {
+      "sequence_id": 1983732826,
+      "real": "3171 private road 4363",
+      "predicha": "317 privaterad463"
+    },
+    {
+      "sequence_id": 1983865658,
+      "real": "jeramy duran",
+      "predicha": "jeramdranm"
+    },
+    {
+      "sequence_id": 1984075294,
+      "real": "314 glen landing",
+      "predicha": "3gla nomiv"
+    },
+    {
+      "sequence_id": 1984116014,
+      "real": "little-princess-tent-t121",
+      "predicha": "jte.rincesent121"
+    },
+    {
+      "sequence_id": 1985000650,
+      "real": "6 brookland ridge",
+      "predicha": "6bokaaduriyig"
+    },
+    {
+      "sequence_id": 1985617822,
+      "real": "+375-35-4932-11-66208",
+      "predicha": "+35-35-932-1-6620"
+    },
+    {
+      "sequence_id": 1985895157,
+      "real": "+599-083-6662-65832",
+      "predicha": "+59-03-612-65832"
+    },
+    {
+      "sequence_id": 1986094810,
+      "real": "6310 cecil huffines",
+      "predicha": "631  o ocilhffrfines"
+    },
+    {
+      "sequence_id": 1986263301,
+      "real": "www.lyfboat.com/",
+      "predicha": "ww ..lyfboatom/"
+    },
+    {
+      "sequence_id": 1986397383,
+      "real": "9526 baucky",
+      "predicha": "952bar ckiyg"
+    },
+    {
+      "sequence_id": 1986880155,
+      "real": "3428 shibley ave",
+      "predicha": "722osphpst"
+    },
+    {
+      "sequence_id": 1987068986,
+      "real": "+970-48-625-972-597",
+      "predicha": "-4-1t5d"
+    },
+    {
+      "sequence_id": 1987277717,
+      "real": "/mapa-carmico.html",
+      "predicha": "/wmaacarcoh"
+    },
+    {
+      "sequence_id": 1987410474,
+      "real": "118-625-1975",
+      "predicha": "18-625-975"
+    },
+    {
+      "sequence_id": 1988007138,
+      "real": "https://www.radiototen.no",
+      "predicha": "hsp//wtradiotendrno"
+    },
+    {
+      "sequence_id": 1988161577,
+      "real": "https://www.tjpr.jus.br",
+      "predicha": "htps../w.air.iurs.br"
+    },
+    {
+      "sequence_id": 1988749319,
+      "real": "https://elmundo.hn",
+      "predicha": "ht/lmuohan"
+    },
+    {
+      "sequence_id": 1989250537,
+      "real": "yamaha-dsp-a970.510448/",
+      "predicha": "cyanmahadpta9705148/"
+    },
+    {
+      "sequence_id": 1989533281,
+      "real": "3420 westville exd",
+      "predicha": "3"
+    },
+    {
+      "sequence_id": 1990179250,
+      "real": "599-726-2672",
+      "predicha": "549-17626l2"
+    },
+    {
+      "sequence_id": 1990616865,
+      "real": "3032 trail 1012",
+      "predicha": "303 trail  tsr"
+    },
+    {
+      "sequence_id": 1991024809,
+      "real": "resocha21/mesisradviliskio",
+      "predicha": "sc2v1/eslsn"
+    },
+    {
+      "sequence_id": 1991587950,
+      "real": "osin-ikole",
+      "predicha": "osinginole"
+    },
+    {
+      "sequence_id": 1991689103,
+      "real": "rodrick truong",
+      "predicha": "kric-ar2n"
+    },
+    {
+      "sequence_id": 1991699537,
+      "real": "+54-629-3230",
+      "predicha": "54-16-s"
+    },
+    {
+      "sequence_id": 1991740998,
+      "real": "5810 french prairie",
+      "predicha": "58afrenchprairie"
+    },
+    {
+      "sequence_id": 1991771259,
+      "real": "http://www.tekmobil.com.tr",
+      "predicha": "htsh//w.ekmbilc0omntu"
+    },
+    {
+      "sequence_id": 1991958149,
+      "real": "+7-2048-57-623",
+      "predicha": "3"
+    },
+    {
+      "sequence_id": 1992139960,
+      "real": "medialab.am/",
+      "predicha": "dediylab-a"
+    },
+    {
+      "sequence_id": 1992405372,
+      "real": "238 east school",
+      "predicha": "238 eatscho"
+    },
+    {
+      "sequence_id": 1992773600,
+      "real": "351 de la pena",
+      "predicha": "351 delap ena"
+    },
+    {
+      "sequence_id": 1992856802,
+      "real": "https://www.tkdlqj.com/",
+      "predicha": "tpsk//wwki.com/"
+    },
+    {
+      "sequence_id": 1993600704,
+      "real": "www.eskatt.cz/claudiaivannap",
+      "predicha": "w.eskac/cuivan"
+    },
+    {
+      "sequence_id": 1993612378,
+      "real": "535 saint albans",
+      "predicha": "535 santalbeans"
+    },
+    {
+      "sequence_id": 1993778703,
+      "real": "6598 bazemore st se",
+      "predicha": "66598rese"
+    },
+    {
+      "sequence_id": 1993786925,
+      "real": "vemcorrer.wordpress.com",
+      "predicha": "283eromm"
+    },
+    {
+      "sequence_id": 1994917362,
+      "real": "4801 john garner",
+      "predicha": "40 diohnarn"
+    },
+    {
+      "sequence_id": 1995523747,
+      "real": "jardinerie",
+      "predicha": "ardinrieeg"
+    },
+    {
+      "sequence_id": 1995740680,
+      "real": "/old-site/petre",
+      "predicha": "oldeie//etre"
+    },
+    {
+      "sequence_id": 1996205753,
+      "real": "+61-724-0134-792-907",
+      "predicha": "+6174-034-792-97"
+    },
+    {
+      "sequence_id": 1997298864,
+      "real": "poze_best_friends",
+      "predicha": "gtex-bes-abrinm"
+    },
+    {
+      "sequence_id": 1998104596,
+      "real": "848-496-8336",
+      "predicha": "848-496-8336"
+    },
+    {
+      "sequence_id": 1998284762,
+      "real": "901-236-0643",
+      "predicha": "990-6-84"
+    },
+    {
+      "sequence_id": 1998375062,
+      "real": "www.teampilipinas.info",
+      "predicha": "www.eeillina.n"
+    },
+    {
+      "sequence_id": 1998707168,
+      "real": "341-877-6245",
+      "predicha": "+4187-64 3-"
+    },
+    {
+      "sequence_id": 1998734054,
+      "real": "9347 quince flower",
+      "predicha": "09347guince flowr"
+    },
+    {
+      "sequence_id": 1998738772,
+      "real": "818-779-3202",
+      "predicha": "88-79-3202"
+    },
+    {
+      "sequence_id": 1999694368,
+      "real": "+266-65-94-050-54",
+      "predicha": "2--50-57"
+    },
+    {
+      "sequence_id": 2000019901,
+      "real": "+47-8721-63-6889",
+      "predicha": "49-63-5"
+    },
+    {
+      "sequence_id": 2000057143,
+      "real": "mariah mitchell",
+      "predicha": "dhmhld"
+    },
+    {
+      "sequence_id": 2000112074,
+      "real": "nakia harvey",
+      "predicha": "kiaver"
+    },
+    {
+      "sequence_id": 2000622730,
+      "real": "672 chin chamorri",
+      "predicha": "67  csamori"
+    },
+    {
+      "sequence_id": 2000782413,
+      "real": "740 edgar steed road",
+      "predicha": "40egarstedra"
+    },
+    {
+      "sequence_id": 2000988441,
+      "real": "57 consumers power",
+      "predicha": "srnesene"
+    },
+    {
+      "sequence_id": 2001173689,
+      "real": "3024 south highway 285",
+      "predicha": "304 sunhighwyv285"
+    },
+    {
+      "sequence_id": 2001359099,
+      "real": "+34-56-759-9742",
+      "predicha": "34-56-759-5972"
+    },
+    {
+      "sequence_id": 2001740509,
+      "real": "7316 town mm",
+      "predicha": "37316 te6mo"
+    },
+    {
+      "sequence_id": 2002110320,
+      "real": "41 trail 174",
+      "predicha": "41 trail174"
+    },
+    {
+      "sequence_id": 2002309648,
+      "real": "+62-352-3512-77",
+      "predicha": "+62-352-35-2-7"
+    },
+    {
+      "sequence_id": 2002456355,
+      "real": "mason fuentes",
+      "predicha": "masnfentes"
+    },
+    {
+      "sequence_id": 2002616624,
+      "real": "+36-8517-7415",
+      "predicha": "+36-871"
+    },
+    {
+      "sequence_id": 2002968557,
+      "real": "6184 west 1700th road",
+      "predicha": "611ethe"
+    },
+    {
+      "sequence_id": 2003344279,
+      "real": "882 lossie goodin",
+      "predicha": "82 losieegocin"
+    },
+    {
+      "sequence_id": 2003406761,
+      "real": "217 cll pincipal",
+      "predicha": "27  cllinikpal"
+    },
+    {
+      "sequence_id": 2003678637,
+      "real": "m.board.com.ua/info-10335/",
+      "predicha": "m.boar.cn.ra/ifo.do3"
+    },
+    {
+      "sequence_id": 2003808004,
+      "real": "http://www.wikibbw.com",
+      "predicha": "htt:www.ibw.om/"
+    },
+    {
+      "sequence_id": 2004315938,
+      "real": "702-845-3123",
+      "predicha": "702-845-323"
+    },
+    {
+      "sequence_id": 2004437377,
+      "real": "67 e state rd 201",
+      "predicha": "6 estateronvod"
+    },
+    {
+      "sequence_id": 2004470272,
+      "real": "+92-94-90-2879-68-84",
+      "predicha": "92---88-6884"
+    },
+    {
+      "sequence_id": 2004702565,
+      "real": "39323 lauderdale county 582",
+      "predicha": "+339323-u11-lu-i5"
+    },
+    {
+      "sequence_id": 2004758162,
+      "real": "316273 bledsoeborough",
+      "predicha": "333627 o"
+    },
+    {
+      "sequence_id": 2004793328,
+      "real": "4 west grannis street",
+      "predicha": "46es.trakisstre"
+    },
+    {
+      "sequence_id": 2004879087,
+      "real": "4725 chehalis valley",
+      "predicha": "472chhalis"
+    },
+    {
+      "sequence_id": 2005172033,
+      "real": "6908 beacon pointe",
+      "predicha": "90 beaonite"
+    },
+    {
+      "sequence_id": 2005477389,
+      "real": "417-298-0845",
+      "predicha": "14-7-2-085"
+    },
+    {
+      "sequence_id": 2005673349,
+      "real": "wannaoneturkey/",
+      "predicha": "wanauyw"
+    },
+    {
+      "sequence_id": 2005827431,
+      "real": "3810 portico estate",
+      "predicha": ""
+    },
+    {
+      "sequence_id": 2006314386,
+      "real": "673-236-4815",
+      "predicha": "73-236-491"
+    },
+    {
+      "sequence_id": 2006357788,
+      "real": "+27-4021-9712-3927",
+      "predicha": "3740-7497-1-31"
+    },
+    {
+      "sequence_id": 2006384667,
+      "real": "www.ramseyer.ch/",
+      "predicha": "6 .wrtmt.eyer.c h/"
+    },
+    {
+      "sequence_id": 2006468694,
+      "real": "3916 east palo brea drive",
+      "predicha": "28ag aodrsadrive"
+    },
+    {
+      "sequence_id": 2007233512,
+      "real": "kenton edwards",
+      "predicha": "kdnnarm"
+    },
+    {
+      "sequence_id": 2007258673,
+      "real": "boutiquestoredesign.com",
+      "predicha": "mustordesgnmcmn"
+    },
+    {
+      "sequence_id": 2007373164,
+      "real": "86 south greenwood road",
+      "predicha": "sug/nrooraos"
+    },
+    {
+      "sequence_id": 2007439665,
+      "real": "9358 southeast 30th way",
+      "predicha": "935ark h esat83  h"
+    },
+    {
+      "sequence_id": 2007685670,
+      "real": "+291-04-9141-70-0281-58",
+      "predicha": "3"
+    },
+    {
+      "sequence_id": 2007750344,
+      "real": "www.babydiscuss.com",
+      "predicha": "w.ieiscson"
+    },
+    {
+      "sequence_id": 1719453141,
+      "real": "q-kubza-per-oborre",
+      "predicha": "l.kape.o4oue"
+    },
+    {
+      "sequence_id": 1719593223,
+      "real": "510234 tattnall pl",
+      "predicha": "510r4 1tatna"
+    },
+    {
+      "sequence_id": 1719758806,
+      "real": "/avilloutreix/",
+      "predicha": "davilotbe/"
+    },
+    {
+      "sequence_id": 1719869394,
+      "real": "/escalada/treis/thyda",
+      "predicha": "scsd/ucicgils"
+    },
+    {
+      "sequence_id": 1719872922,
+      "real": "+996-45-9416-164-159",
+      "predicha": "+996-5-9416-64-9"
+    },
+    {
+      "sequence_id": 1719996880,
+      "real": "a-times.id",
+      "predicha": "hihes"
+    },
+    {
+      "sequence_id": 1720008537,
+      "real": "789588 north canales circle",
+      "predicha": "78958northcales cir cle"
+    },
+    {
+      "sequence_id": 1720178105,
+      "real": "+45-040-39-831",
+      "predicha": "+045-040-39-831"
+    },
+    {
+      "sequence_id": 1720280621,
+      "real": "www.brownmemorialamec.org",
+      "predicha": "ww.bownmemoriallanmec.org"
+    },
+    {
+      "sequence_id": 1720390318,
+      "real": "1285 wantastiquet shore",
+      "predicha": "1185 6antiuethre"
+    },
+    {
+      "sequence_id": 1720978259,
+      "real": "accipient/turkce-ispanyolca",
+      "predicha": "aciien/urce-ipca"
+    },
+    {
+      "sequence_id": 1721022293,
+      "real": "861 briscoe ranch",
+      "predicha": "861bis ceranch"
+    },
+    {
+      "sequence_id": 1721160006,
+      "real": "931-657-5813",
+      "predicha": " bi13"
+    },
+    {
+      "sequence_id": 1721221146,
+      "real": "ftp://tennisround.com",
+      "predicha": "6 huss"
+    },
+    {
+      "sequence_id": 1721245027,
+      "real": "www.mamasandpapas.com/pth200/",
+      "predicha": "wmmasandascomh20o/"
+    },
+    {
+      "sequence_id": 1721369646,
+      "real": "q-amarylis/weinwelt",
+      "predicha": "amoarilis/weinwelt"
+    },
+    {
+      "sequence_id": 1721500367,
+      "real": "+91-8743-77-2915-34",
+      "predicha": "+918743-7-29-5-34"
+    },
+    {
+      "sequence_id": 1721554722,
+      "real": "7995 private drive 5187",
+      "predicha": "95ivatedrive518"
+    },
+    {
+      "sequence_id": 1721610651,
+      "real": "jinzhuguizhengtianliao/",
+      "predicha": "jii2nhguihegiani"
+    },
+    {
+      "sequence_id": 1721741983,
+      "real": "duisburg-huckingen",
+      "predicha": ""
+    },
+    {
+      "sequence_id": 1721897469,
+      "real": "+92-585-95-7833",
+      "predicha": "+92-58-95-783"
+    },
+    {
+      "sequence_id": 1722017512,
+      "real": "+381-004-374-4064-83-22",
+      "predicha": "+38104-374-40641832"
+    },
+    {
+      "sequence_id": 1722114696,
+      "real": "67 stonewood estates dr",
+      "predicha": "leadt"
+    },
+    {
+      "sequence_id": 1722149889,
+      "real": "1521 w 17th",
+      "predicha": "+362-1669"
+    },
+    {
+      "sequence_id": 1722310998,
+      "real": "istas-19-mid-layer-granola",
+      "predicha": "jstafpmi-layeutgranola"
+    },
+    {
+      "sequence_id": 1722342443,
+      "real": "1470 salas place",
+      "predicha": "c30"
+    },
+    {
+      "sequence_id": 1722578901,
+      "real": "+503-8406-81-723-02-930",
+      "predicha": "+0503-8406-81732-930"
+    },
+    {
+      "sequence_id": 1722619388,
+      "real": "668 nfs 2220",
+      "predicha": "+6682fs20"
+    },
+    {
+      "sequence_id": 1723141709,
+      "real": "graciela lara",
+      "predicha": "lac"
+    },
+    {
+      "sequence_id": 1723429298,
+      "real": "1889 hollow wood way",
+      "predicha": "189 h woy"
+    },
+    {
+      "sequence_id": 1723784720,
+      "real": "jiashi21720",
+      "predicha": "jiiashig71l"
+    },
+    {
+      "sequence_id": 1723899495,
+      "real": "andreas--siegfried",
+      "predicha": "rreasiid"
+    },
+    {
+      "sequence_id": 1724592314,
+      "real": "+48-0295-3409-066",
+      "predicha": "+48-0295-3409-06"
+    },
+    {
+      "sequence_id": 1724879926,
+      "real": "mx.advfn.com/city-city/ramlice",
+      "predicha": ".avfn.com/ctziti/ramlice"
+    },
+    {
+      "sequence_id": 1724901229,
+      "real": "alisha vo",
+      "predicha": "lisave"
+    },
+    {
+      "sequence_id": 1725578378,
+      "real": "133 sonaurah",
+      "predicha": "13 snauay"
+    },
+    {
+      "sequence_id": 1725813896,
+      "real": "reportase.tv/",
+      "predicha": "ees/"
+    },
+    {
+      "sequence_id": 1725909178,
+      "real": "+257-2790-38",
+      "predicha": "5727590638"
+    },
+    {
+      "sequence_id": 1726074203,
+      "real": "http://www.dechering-gmbh.de",
+      "predicha": "h/ww.dcheringombhde"
+    },
+    {
+      "sequence_id": 1726340743,
+      "real": "in-roseberg,+nsw+2793",
+      "predicha": "jnrosebrg1ns61793"
+    },
+    {
+      "sequence_id": 1726821339,
+      "real": "+52-2624-01",
+      "predicha": "52-326250-0"
+    },
+    {
+      "sequence_id": 1727273269,
+      "real": "+84-24-90-711-855",
+      "predicha": "84-24-90-71-85"
+    },
+    {
+      "sequence_id": 1727535259,
+      "real": "maricela powers",
+      "predicha": "co-xpowe/"
+    },
+    {
+      "sequence_id": 1727549765,
+      "real": "bernice ortiz",
+      "predicha": "bnrcaorunta"
+    },
+    {
+      "sequence_id": 1727938401,
+      "real": "marlene barrett",
+      "predicha": "onleraret"
+    },
+    {
+      "sequence_id": 1727942424,
+      "real": "https://www.nfbio.se",
+      "predicha": "hts:w.nbio.e"
+    },
+    {
+      "sequence_id": 1728074570,
+      "real": "www.irineka.eu",
+      "predicha": "3"
+    },
+    {
+      "sequence_id": 1728332505,
+      "real": "andres rose",
+      "predicha": "an rerose"
+    },
+    {
+      "sequence_id": 1728446305,
+      "real": "siogranexaccan.ga",
+      "predicha": "ejokr3essccaknte"
+    },
+    {
+      "sequence_id": 1728557404,
+      "real": "+47-200-42-569-219",
+      "predicha": "44420-42-4569-219"
+    },
+    {
+      "sequence_id": 1729620920,
+      "real": "796 l vallot rd",
+      "predicha": "796aostrom"
+    },
+    {
+      "sequence_id": 1730105989,
+      "real": "www.codechef.com",
+      "predicha": "ww.cchf.covu"
+    },
+    {
+      "sequence_id": 1730155466,
+      "real": "609 cannie davis",
+      "predicha": "wo09cnliet.ra"
+    },
+    {
+      "sequence_id": 1730294426,
+      "real": "keegan felix",
+      "predicha": "ieanfeli"
+    },
+    {
+      "sequence_id": 1730353665,
+      "real": "moa_yuki/360356",
+      "predicha": "n3"
+    },
+    {
+      "sequence_id": 1730606499,
+      "real": "3 springhill farm court",
+      "predicha": "ses"
+    },
+    {
+      "sequence_id": 1731637814,
+      "real": "acquariofiliaconsapevole.it",
+      "predicha": "acparioflconsvles.it"
+    },
+    {
+      "sequence_id": 1731650004,
+      "real": "colegiodocarmo/folio/",
+      "predicha": "legidarflgn"
+    },
+    {
+      "sequence_id": 1731709970,
+      "real": "www.iglow.no",
+      "predicha": "w.iglomwm.rm"
+    },
+    {
+      "sequence_id": 1731748108,
+      "real": "2537 cerino",
+      "predicha": "253erine"
+    },
+    {
+      "sequence_id": 1731987781,
+      "real": "jacobscornerachar/tich-diem",
+      "predicha": "jiaobscnerachanr/tich.diem"
+    },
+    {
+      "sequence_id": 1732091160,
+      "real": "https://variousstorenl.com",
+      "predicha": "vaaoesscrm"
+    },
+    {
+      "sequence_id": 1732093382,
+      "real": "abel quintero",
+      "predicha": "583rooas"
+    },
+    {
+      "sequence_id": 1732152719,
+      "real": "+61-6543-4086-36-79",
+      "predicha": "+61-6543-4086-36-79"
+    },
+    {
+      "sequence_id": 1732574650,
+      "real": "587162 prairie road 1019",
+      "predicha": "58162t prg"
+    },
+    {
+      "sequence_id": 1733030328,
+      "real": "edwin huff",
+      "predicha": "sedwin hrf"
+    },
+    {
+      "sequence_id": 1733514003,
+      "real": "https://e-concierge.de",
+      "predicha": "htse.concierge.de"
+    },
+    {
+      "sequence_id": 1733578899,
+      "real": "433-471-5773",
+      "predicha": "+453-41573"
+    },
+    {
+      "sequence_id": 1733590541,
+      "real": "+383-0157-9304",
+      "predicha": "+3832-0157-9304"
+    },
+    {
+      "sequence_id": 1733795292,
+      "real": "/562940",
+      "predicha": "/561940o"
+    },
+    {
+      "sequence_id": 1733969959,
+      "real": "randolph parsons",
+      "predicha": "aac"
+    },
+    {
+      "sequence_id": 1734317386,
+      "real": "asuma-kousuke-pics.tumblr.com",
+      "predicha": "asuaorsre-csurbclcm"
+    },
+    {
+      "sequence_id": 1734349293,
+      "real": "www.auerberg-apotheke.de",
+      "predicha": "w.taueooactcmest"
+    },
+    {
+      "sequence_id": 1734578994,
+      "real": "673-655-1876",
+      "predicha": "+673-6551-8876"
+    },
+    {
+      "sequence_id": 1734753770,
+      "real": "freaking-funny-memes",
+      "predicha": "1s99rakingfruess"
+    },
+    {
+      "sequence_id": 1735058421,
+      "real": "+255-820-74-423",
+      "predicha": "13914939463"
+    },
+    {
+      "sequence_id": 1735208148,
+      "real": "uod-it-newsletter",
+      "predicha": "utitnewsleter"
+    },
+    {
+      "sequence_id": 1735432268,
+      "real": "790-371-6284",
+      "predicha": "8s"
+    },
+    {
+      "sequence_id": 1735455974,
+      "real": "7866 pattershack road",
+      "predicha": "786ater3s k sa"
+    },
+    {
+      "sequence_id": 1735513929,
+      "real": "rusty montes",
+      "predicha": "+osf"
+    },
+    {
+      "sequence_id": 1735647064,
+      "real": "relizbarberiayboutique",
+      "predicha": "oelarerayboutue"
+    },
+    {
+      "sequence_id": 1735713850,
+      "real": "wasarainfo/varia-veselova",
+      "predicha": "wasadainfovakiaveselov"
+    },
+    {
+      "sequence_id": 1735742136,
+      "real": "859757 nfd 100",
+      "predicha": "859757 fdo"
+    },
+    {
+      "sequence_id": 1736379467,
+      "real": "60447 gwynelle",
+      "predicha": "6047 gwnle"
+    },
+    {
+      "sequence_id": 1736756586,
+      "real": "tanya garrison",
+      "predicha": "lkia garis"
+    },
+    {
+      "sequence_id": 1736965818,
+      "real": "7232 trulock",
+      "predicha": "7632 trnam"
+    },
+    {
+      "sequence_id": 1738231378,
+      "real": "352607/enocktibane",
+      "predicha": "352o7/enokeca"
+    },
+    {
+      "sequence_id": 1738249125,
+      "real": "679 south 210th road",
+      "predicha": "679 sorthhace"
+    },
+    {
+      "sequence_id": 1738701073,
+      "real": "www.trip2athens.com",
+      "predicha": "ww.tripvathens.com"
+    },
+    {
+      "sequence_id": 1739035125,
+      "real": "pokemon-edward-jenner-6",
+      "predicha": "kewenr"
+    },
+    {
+      "sequence_id": 1739161467,
+      "real": "45_45450/android-games.47",
+      "predicha": "45 455 ranokoitheal"
+    },
+    {
+      "sequence_id": 1739753741,
+      "real": "jeannette warner",
+      "predicha": "rieaneewarner"
+    },
+    {
+      "sequence_id": 1740003668,
+      "real": "+290-611-0754-62",
+      "predicha": "+9-6-0754-62"
+    },
+    {
+      "sequence_id": 1740271464,
+      "real": "anicka-newell-9/_ciluz",
+      "predicha": "aiewelfour"
+    },
+    {
+      "sequence_id": 1740620770,
+      "real": "motherhoodinpointoffact.com",
+      "predicha": "othrhodinpoinoactco"
+    },
+    {
+      "sequence_id": 1740662289,
+      "real": "779 phillip calais",
+      "predicha": "7590hili pcalais"
+    },
+    {
+      "sequence_id": 1741135073,
+      "real": "420741 bennett road exd",
+      "predicha": "42074 beukneatrdep"
+    },
+    {
+      "sequence_id": 1741210496,
+      "real": "57 lansing meadows",
+      "predicha": "031 o ws"
+    },
+    {
+      "sequence_id": 1741327837,
+      "real": "1981 s sheckles rd",
+      "predicha": "1981shecklsro"
+    },
+    {
+      "sequence_id": 1741372814,
+      "real": "dnipropetrovsk",
+      "predicha": "gnjietroovsk"
+    },
+    {
+      "sequence_id": 1742278387,
+      "real": "959-819-5652",
+      "predicha": "99819565-"
+    },
+    {
+      "sequence_id": 1742304502,
+      "real": "keli arias",
+      "predicha": "ly ara"
+    },
+    {
+      "sequence_id": 1742776262,
+      "real": "wyatt callahan",
+      "predicha": "wyi.icealhanm"
+    },
+    {
+      "sequence_id": 1742923039,
+      "real": "pinguthepanzer",
+      "predicha": "hinghepante"
+    },
+    {
+      "sequence_id": 1743120008,
+      "real": "6104 co road a001",
+      "predicha": "6104 co road aoo1d"
+    },
+    {
+      "sequence_id": 1743413011,
+      "real": "tw.wjdrying.com",
+      "predicha": "43"
+    },
+    {
+      "sequence_id": 1743542908,
+      "real": "www.serperuano.com/where",
+      "predicha": "m.cos"
+    },
+    {
+      "sequence_id": 1743927147,
+      "real": "van fitzgerald",
+      "predicha": "2annfitterald"
+    },
+    {
+      "sequence_id": 1744144164,
+      "real": "zmfest/duenger/red-ring.html/",
+      "predicha": "gubighol"
+    },
+    {
+      "sequence_id": 1744174556,
+      "real": "34380 j bar",
+      "predicha": "ibeh"
+    },
+    {
+      "sequence_id": 1744227447,
+      "real": "kendall gilmore",
+      "predicha": "bsdrdagalmoret"
+    },
+    {
+      "sequence_id": 1744340365,
+      "real": "jill portillo",
+      "predicha": "7ner eohs"
+    },
+    {
+      "sequence_id": 1744431413,
+      "real": "abram knox",
+      "predicha": "bramnhp"
+    },
+    {
+      "sequence_id": 1745275227,
+      "real": "8435 southeast 3rd street",
+      "predicha": "8435 1e hare"
+    },
+    {
+      "sequence_id": 1745705621,
+      "real": "644 windshift",
+      "predicha": "6"
+    },
+    {
+      "sequence_id": 1745725494,
+      "real": "161642 paseo st",
+      "predicha": "1161645 hasc aran"
+    },
+    {
+      "sequence_id": 1745752046,
+      "real": "+44-0121-91",
+      "predicha": "-hht6t"
+    },
+    {
+      "sequence_id": 1745757730,
+      "real": "630-385-8110",
+      "predicha": "630--57"
+    },
+    {
+      "sequence_id": 1745811635,
+      "real": "+380-04-5714-90",
+      "predicha": "itcaw"
+    },
+    {
+      "sequence_id": 1746125204,
+      "real": "128-765-1244",
+      "predicha": "bwwur-r6/"
+    },
+    {
+      "sequence_id": 1746507708,
+      "real": "josue collier",
+      "predicha": "msare com ier"
+    },
+    {
+      "sequence_id": 1746605366,
+      "real": "+45-73-350-4328-550",
+      "predicha": "+45-73--350--432200550"
+    },
+    {
+      "sequence_id": 1746647008,
+      "real": "laurel johnson",
+      "predicha": "lareayhnson"
+    },
+    {
+      "sequence_id": 1746864249,
+      "real": "116 north la tomas court",
+      "predicha": "16hatcoas crum"
+    },
+    {
+      "sequence_id": 1747005320,
+      "real": "www.nishikai.co.jp/6608",
+      "predicha": "d.kni/hw"
+    },
+    {
+      "sequence_id": 1747279389,
+      "real": "78 walpi ct",
+      "predicha": "78 6 aliiyc"
+    },
+    {
+      "sequence_id": 1747496173,
+      "real": "6869 raynolds place southeast",
+      "predicha": "6869 raynolosplacesorthet"
+    },
+    {
+      "sequence_id": 1747857067,
+      "real": "139-246-7723",
+      "predicha": "139-t4-98"
+    },
+    {
+      "sequence_id": 1748291994,
+      "real": "2339 carillon plz e",
+      "predicha": "39 arilon l "
+    },
+    {
+      "sequence_id": 1748530471,
+      "real": "giuseppe wyatt",
+      "predicha": "uei"
+    },
+    {
+      "sequence_id": 1748701422,
+      "real": "hands_umeda/larged.com",
+      "predicha": "and-rrmed-largebo"
+    },
+    {
+      "sequence_id": 1748986275,
+      "real": "583-874-3415",
+      "predicha": "+583-74-341-5"
+    },
+    {
+      "sequence_id": 1749478084,
+      "real": "brian salazar",
+      "predicha": "briansalaar"
+    },
+    {
+      "sequence_id": 1749495338,
+      "real": "http://www.unifacear.edu.br",
+      "predicha": "ht//a.unifacear.eoor.be"
+    },
+    {
+      "sequence_id": 1749620237,
+      "real": "754 william ammon",
+      "predicha": "754 wilymarn"
+    },
+    {
+      "sequence_id": 1749847910,
+      "real": "6636 laroi",
+      "predicha": "6.-7e"
+    },
+    {
+      "sequence_id": 1749981750,
+      "real": "63 jacob allcott",
+      "predicha": "63 i nabac"
+    },
+    {
+      "sequence_id": 1750169348,
+      "real": "www.keystore.co.uk",
+      "predicha": "ww.reis.toe.cco.r"
+    },
+    {
+      "sequence_id": 1750236040,
+      "real": "125-770-7949",
+      "predicha": "25-70-7949"
+    },
+    {
+      "sequence_id": 1750369075,
+      "real": "https://yourhumanrelations.com",
+      "predicha": "htts//iouhmanrelations.com"
+    },
+    {
+      "sequence_id": 1750635998,
+      "real": "simon walls",
+      "predicha": "jeo wele"
+    },
+    {
+      "sequence_id": 1750722949,
+      "real": "www.city.fujisawa.kanagawa.jp/",
+      "predicha": "w.tciyfuiisawakanagawaip/"
+    },
+    {
+      "sequence_id": 1750831400,
+      "real": "+234-0692-13-260-74",
+      "predicha": "+-360-74"
+    },
+    {
+      "sequence_id": 1750990266,
+      "real": "1402 co 75/2",
+      "predicha": "1"
+    },
+    {
+      "sequence_id": 1751515890,
+      "real": "9304 pike road 224",
+      "predicha": "94 i"
+    }
+  ]
+}
