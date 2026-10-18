@@ -16,14 +16,7 @@ if not disponibles:
 
 def preprocesar_subido(archivo) -> dict:
     """{sequence_id: (T, F)} de un parquet de landmarks subido."""
-    try:
-        from preprocess import preprocesar_parquet
-    except ImportError:
-        # TODO(Cindy): respaldo temporal hasta que exista app/preprocess.py con
-        # preprocesar_parquet(archivo) -> {sequence_id: np.ndarray (T, F)}.
-        # Borrar este bloque except cuando se implemente.
-        df = features.leer_parquet(archivo)
-        return {int(sid): features.preprocesar_secuencia(seq) for sid, seq in df.groupby(level=0)}
+    from preprocess import preprocesar_parquet
     return preprocesar_parquet(archivo)
 
 

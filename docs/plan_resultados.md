@@ -91,16 +91,9 @@ La única dependencia fuerte era la **parte inicial** (datos para modelado + loo
   > `reports/figures/app_*.png`).
 
 ### Cindy – Aumentación + preprocesamiento de la app + marco teórico
-- [ ] `src/augment.py`: descarte aleatorio de cuadros y de puntos, ruido, escala/rotación leve, cambio de velocidad. Se pasa como `transform` a `LandmarkDataset`.
-- [ ] `app/preprocess.py`: preprocesar un parquet/secuencia nueva subida en la app con `src.features` (el usuario no debe notar nada).
-- > ⚠️ **Pendiente para María José — borrar esta nota al implementarlo:**
-  > - `app/preprocess.py` debe exponer `preprocesar_parquet(archivo) -> dict[int, np.ndarray]`
-  >   (`{sequence_id: (T, 227)}`). `archivo` es lo que devuelve `st.file_uploader` (un objeto tipo archivo, no una ruta).
-  >   `app/pages/2_Predecir.py` lo importa con `from preprocess import preprocesar_parquet`; mientras no exista usa un
-  >   respaldo marcado con `# TODO(Cindy)`: al implementarlo, **borren ese bloque `except ImportError`**.
-  > - `src/augment.py`: un invocable `transform(x: np.ndarray (T, F)) -> np.ndarray (T', F)` que se pueda pasar como
-  >   `transform` a `dataset.crear_dataloaders`. El Transformer (`notebooks/10`) se entrenó sin aumentación porque aún no existía.
-- [ ] Informe: **Marco teórico** (adaptar la revisión bibliográfica del Avance 2 + MediaPipe/landmarks), **Metodología** (pasos, split, herramientas y cómputo) y **Referencias APA**.
+- [x] `src/augment.py`: descarte aleatorio de cuadros y de puntos, ruido, escala/rotación leve, cambio de velocidad. Se pasa como `transform` a `LandmarkDataset`.
+- [x] `app/preprocess.py`: preprocesar un parquet/secuencia nueva subida en la app con `src.features` (el usuario no debe notar nada).
+- [x] Informe (`docs/06_marco_teorico_metodologia.md`): **Marco teórico** (adaptar la revisión bibliográfica del Avance 2 + MediaPipe/landmarks), **Metodología** (pasos, split, herramientas y cómputo) y **Referencias APA**.
 
 ### Daniela – Línea base + comparación de modelos
 - [ ] `src/models/lstm.py` (+ `gru.py`) + `notebooks/08_modelo_lstm.ipynb`: LSTM unidireccional + CTC (línea base) y GRU unidireccional (ablación); tuning básico.
