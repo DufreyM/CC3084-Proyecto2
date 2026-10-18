@@ -86,10 +86,20 @@ La única dependencia fuerte era la **parte inicial** (datos para modelado + loo
 - [x] `src/models/cnn_bigru.py` + `notebooks/07_modelo_cnn_bigru.ipynb`: CNN 1D con stride + BiGRU + CTC; tuning de 4 variantes. **CER test 0.490**, guardado en `models/cnn_bigru.pt` y `reports/metrics/cnn_bigru.json` (sirve de ejemplo del formato para la app y la comparación).
 - [x] `docs/05_modelo_cnn_bigru.md`: sección del modelo principal para el informe (justificación, ajuste y resultados).
 - [ ] Informe: integración final (`reports/build_informe.py` → PDF) y carpeta de Google Drive.
+- > ⚠️ **Pendiente para María José — borrar esta nota al implementarlo:** integrar en `build_informe.py`
+  > `docs/06_modelo_transformer.md` (modelo Transformer) y `docs/08_app.md` (descripción de la app, con capturas
+  > `reports/figures/app_*.png`).
 
 ### Cindy – Aumentación + preprocesamiento de la app + marco teórico
 - [ ] `src/augment.py`: descarte aleatorio de cuadros y de puntos, ruido, escala/rotación leve, cambio de velocidad. Se pasa como `transform` a `LandmarkDataset`.
 - [ ] `app/preprocess.py`: preprocesar un parquet/secuencia nueva subida en la app con `src.features` (el usuario no debe notar nada).
+- > ⚠️ **Pendiente para María José — borrar esta nota al implementarlo:**
+  > - `app/preprocess.py` debe exponer `preprocesar_parquet(archivo) -> dict[int, np.ndarray]`
+  >   (`{sequence_id: (T, 227)}`). `archivo` es lo que devuelve `st.file_uploader` (un objeto tipo archivo, no una ruta).
+  >   `app/pages/2_Predecir.py` lo importa con `from preprocess import preprocesar_parquet`; mientras no exista usa un
+  >   respaldo marcado con `# TODO(Cindy)`: al implementarlo, **borren ese bloque `except ImportError`**.
+  > - `src/augment.py`: un invocable `transform(x: np.ndarray (T, F)) -> np.ndarray (T', F)` que se pueda pasar como
+  >   `transform` a `dataset.crear_dataloaders`. El Transformer (`notebooks/10`) se entrenó sin aumentación porque aún no existía.
 - [ ] Informe: **Marco teórico** (adaptar la revisión bibliográfica del Avance 2 + MediaPipe/landmarks), **Metodología** (pasos, split, herramientas y cómputo) y **Referencias APA**.
 
 ### Daniela – Línea base + comparación de modelos
@@ -97,18 +107,28 @@ La única dependencia fuerte era la **parte inicial** (datos para modelado + loo
 - [ ] `notebooks/11_comparacion_modelos.ipynb`: leer `reports/metrics/*.json` y comparar CER, tiempo de entrenamiento, ms por secuencia y n.º de parámetros.
 - [ ] Al menos **3 visualizaciones estáticas** en `reports/figures/` (p. ej. CER por modelo, curvas de entrenamiento, error por carácter / matriz de confusión de letras M-N-T).
 - [ ] Informe: **Resultados y análisis** – ajuste de parámetros y comparación de algoritmos.
+- > ⚠️ **Pendiente para María José — borrar esta nota al implementarlo:** guardar los modelos con
+  > `train.guardar_resultados("lstm", ...)` y `train.guardar_resultados("gru", ...)` (esos nombres exactos): la app y
+  > la presentación los detectan solos. Guardar las figuras de comparación como `reports/figures/comparacion_*.png`
+  > para incluirlas en la presentación. Para colores coherentes con la app, usar `app/utils.py:COLORES`.
 
 ### José – BiLSTM + exploración de datos en la app
 - [ ] `src/models/bilstm.py` + `notebooks/09_modelo_bilstm.ipynb`: BiLSTM + CTC; tuning comparable al de la BiGRU.
 - [ ] `app/pages/1_Explorar_datos.py`: explorar las variables del dataset limpio (longitudes, faltantes por mano, frecuencia de caracteres, animación de landmarks de una secuencia). Debe contar la historia del EDA.
+- > ⚠️ **Pendiente para María José — borrar esta nota al implementarlo:**
+  > - Guardar el modelo con `train.guardar_resultados("bilstm", ...)` (ese nombre exacto) para que la app y la presentación lo detecten.
+  > - En `1_Explorar_datos.py` empezar con `import utils` y `utils.configurar_pagina("Explorar datos")`, y usar
+  >   `utils.TEAL`, `utils.NARANJA`, `utils.NAVY`, `utils.GRIS` y Plotly para que la página tenga la misma paleta que las demás.
+  >   `utils` ya agrega la raíz del repo al `sys.path`, así que después se puede importar `from src import ...`.
+  >   La app se corre con `streamlit run app/app.py` desde la raíz del repo.
 - [ ] Informe: **Introducción** y **Objetivos** (general y específicos, actualizados al modelado) + descripción del dataset original y EDA (reutilizar el informe del Avance 1).
 
 ### María José – Transformer + resultados en la app + presentación
-- [ ] `src/models/transformer.py` + `notebooks/10_modelo_transformer.ipynb`: encoder Transformer pequeño + CTC (submuestreo temporal antes de la atención para secuencias de ~750 cuadros).
-- [ ] `app/app.py` (inicio) y `app/pages/2_Predecir.py`: subir/elegir una secuencia, elegir un modelo o todos, mostrar frase predicha vs real.
-- [ ] `app/pages/3_Rendimiento.py`: gráficas **interactivas** de rendimiento en test con opción de **ocultarlas**; paleta coherente (teoría del color).
-- [ ] Presentación final (`reports/build_presentacion.py` o diapositivas nuevas).
-- [ ] Informe: **descripción de la app** con capturas y justificación de tecnologías (propuesta: Streamlit + Plotly).
+- [x] `src/models/transformer.py` + `notebooks/10_modelo_transformer.ipynb`: encoder Transformer pequeño + CTC (submuestreo temporal antes de la atención para secuencias de ~750 cuadros); tuning de 6 variantes. **CER test 0.499** (empata con el CNN-BiGRU, Wilcoxon p = 0.21, con 0.63 M parámetros y 1.8 ms/secuencia), guardado en `models/transformer.pt` y `reports/metrics/transformer.json`.
+- [x] `app/app.py` (inicio) y `app/pages/2_Predecir.py`: subir/elegir una secuencia, elegir un modelo o todos, mostrar frase predicha vs real.
+- [x] `app/pages/3_Rendimiento.py`: gráficas **interactivas** de rendimiento en test con opción de **ocultarlas**; paleta coherente (teoría del color).
+- [x] Presentación final (`reports/build_presentacion.py` → `reports/presentacion_final.pptx`). Lee `reports/metrics/*.json`: volver a correrlo cuando entren la LSTM, la GRU y la BiLSTM, y actualizar `CONCLUSIONES` en el script.
+- [x] Informe: **descripción de la app** con capturas y justificación de tecnologías en `docs/08_app.md`; sección del Transformer en `docs/06_modelo_transformer.md`.
 
 ### Todo el equipo
 - [ ] **Conclusiones** del informe: cómo se cumplió cada objetivo y qué tan efectivo fue cada modelo.

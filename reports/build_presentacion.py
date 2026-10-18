@@ -138,7 +138,7 @@ def title_slide():
     slide = new_slide(NAVY)
     add_rect(slide, 0, 0, Inches(0.28), SH, TEAL)
     add_rect(slide, Inches(0.9), Inches(1.55), Inches(0.6), Inches(0.08), ORANGE)
-    add_text(slide, "PROYECTO 2 · ANÁLISIS EXPLORATORIO", Inches(0.9), Inches(1.0),
+    add_text(slide, "PROYECTO 2 · RESULTADOS", Inches(0.9), Inches(1.0),
               Inches(10), Inches(0.4), size=15, color=TEAL, bold=True)
     add_text(slide, "Reconocimiento de deletreo manual\nen lenguaje de señas (ASL Fingerspelling)",
               Inches(0.9), Inches(1.85), Inches(11.2), Inches(2.0), size=36, bold=True,
@@ -147,7 +147,7 @@ def title_slide():
               Inches(0.9), Inches(3.75), Inches(11), Inches(0.5), size=16, color=RGBColor(0xB8, 0xC4, 0xD0))
     add_text(slide, "\n".join(MIEMBROS), Inches(0.9), Inches(4.6), Inches(6), Inches(2.0),
               size=15, color=WHITE, line_spacing=1.35)
-    add_text(slide, "CC3084 · Data Science\nUniversidad del Valle de Guatemala\n6 de septiembre de 2026",
+    add_text(slide, "CC3084 · Data Science\nUniversidad del Valle de Guatemala\n19 de octubre de 2026",
               Inches(9.2), Inches(6.3), Inches(3.3), Inches(1.1), size=12,
               color=RGBColor(0x8A, 0x98, 0xA8), align=PP_ALIGN.RIGHT, line_spacing=1.3)
 
@@ -311,16 +311,233 @@ add_bullets(slide, [
 ], Inches(0.7), Inches(1.9), Inches(11.9), Inches(4.9), size=18, gap=20)
 add_page_number(slide, 13)
 
-# 13. Conclusiones y siguientes pasos --------------------------------------
-slide = content_slide("Conclusiones", "Próximos pasos para el modelado")
+# 13. Del EDA al modelado --------------------------------------------------
+slide = content_slide("Del EDA al modelado", "Cada hallazgo se convirtió en una decisión")
 add_bullets(slide, [
-    "Tratar landmarks faltantes con forward-fill, no interpolación ni ceros.",
-    "Descartar las 468 columnas de rostro: aportan poco y encarecen el procesamiento.",
-    "Separar entrenamiento y validación por participante, no al azar.",
-    "Aceptar longitud de secuencia variable (recorte o relleno).",
-    "Reportar desempeño por carácter, no solo en promedio.",
+    "Landmarks faltantes → forward-fill dentro de la secuencia y máscara de detección de cada mano como entrada.",
+    "Rostro con poca información → se usan solo manos (centradas en la muñeca) y pose: 227 valores por cuadro.",
+    "Participantes desbalanceados → split por participante: quienes están en prueba nunca se vieron al entrenar.",
+    "Secuencias de longitud variable (mediana 147, cola ~750) → recorte a 384 cuadros y reducción temporal en el modelo.",
+    "Caracteres desbalanceados → el desempeño se reporta también por carácter.",
 ], Inches(0.7), Inches(1.9), Inches(11.9), Inches(4.9), size=18, gap=20)
 add_page_number(slide, 14)
+
+# --- Fase de resultados: modelos, comparacion, app y conclusiones -------------
+# Lee reports/metrics/*.json: si un modelo aun no se ha guardado, su diapositiva lo marca como pendiente
+# y basta con volver a correr este script cuando exista.
+import json
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+
+METRICS = REPORTS / "metrics"
+# Mismos nombres y colores que app/utils.py para que la presentacion y la app se vean iguales
+MODELOS = {
+    "cnn_bigru": ("CNN-BiGRU", "#2CA6A4", "Principal", "CNN 1D con stride + GRU bidireccional"),
+    "transformer": ("Transformer", "#F28C28", "Mayor techo", "Conv1d con stride + encoder Transformer"),
+    "lstm": ("LSTM", "#3B6EA8", "Línea base", "LSTM unidireccional"),
+    "bilstm": ("BiLSTM", "#C8507A", "Variante", "LSTM bidireccional"),
+    "gru": ("GRU", "#8E6BBF", "Ablación", "GRU unidireccional"),
+}
+reportes = {m: json.loads((METRICS / f"{m}.json").read_text(encoding="utf-8"))
+            for m in MODELOS if (METRICS / f"{m}.json").exists()}
+orden = sorted(reportes, key=lambda m: reportes[m]["cer_test"])
+
+
+def rgb(hex_color):
+    return RGBColor.from_string(hex_color.lstrip("#"))
+
+
+def figura_cer():
+    fig, ax = plt.subplots(figsize=(8, 4.6))
+    nombres = [MODELOS[m][0] for m in orden]
+    x = range(len(orden))
+    ax.bar([i - 0.2 for i in x], [reportes[m]["cer_val"] for m in orden], 0.4, label="validación",
+           color=[MODELOS[m][1] for m in orden], alpha=0.45)
+    barras = ax.bar([i + 0.2 for i in x], [reportes[m]["cer_test"] for m in orden], 0.4, label="prueba",
+                    color=[MODELOS[m][1] for m in orden])
+    ax.bar_label(barras, fmt="%.3f", fontsize=11, padding=3)
+    ax.set_xticks(list(x), nombres, fontsize=12)
+    ax.set_ylabel("CER (menor es mejor)")
+    ax.set_ylim(0, 1)
+    ax.spines[["top", "right"]].set_visible(False)
+    ax.legend(frameon=False)
+    path = FIGS / "presentacion_cer_modelos.png"
+    fig.savefig(path, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+    return path
+
+
+def figura_costo():
+    fig, ax = plt.subplots(figsize=(8, 4.6))
+    for m in orden:
+        r = reportes[m]
+        ax.scatter(r["ms_por_secuencia"], r["cer_test"], s=r["n_parametros"] / 4000, color=MODELOS[m][1],
+                   alpha=0.85, edgecolor="white", linewidth=1.5)
+        ax.annotate(f"{MODELOS[m][0]}\n{r['n_parametros'] / 1e6:.2f} M parám.", (r["ms_por_secuencia"], r["cer_test"]),
+                    xytext=(14, 4), textcoords="offset points", fontsize=11)
+    ax.set_xlabel("ms por secuencia al predecir (CPU)")
+    ax.set_ylabel("CER en prueba")
+    # Ejes desde 0 para no exagerar diferencias pequenas entre modelos
+    ax.set_xlim(0, max(reportes[m]["ms_por_secuencia"] for m in orden) * 1.6)
+    ax.set_ylim(0, 1)
+    ax.spines[["top", "right"]].set_visible(False)
+    path = FIGS / "presentacion_costo_error.png"
+    fig.savefig(path, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+    return path
+
+
+def pagina():
+    global n
+    n += 1
+    return n
+
+
+n = 14
+
+slide = section_slide("", "Modelado", "Cuatro arquitecturas sobre la misma base de datos y entrenamiento")
+add_page_number(slide, pagina())
+
+slide = content_slide("Modelado", "Base común: misma entrada, mismo split, mismo entrenamiento")
+add_bullets(slide, [
+    "Entrada: cada cuadro es un vector de 227 valores (manos y pose normalizadas + máscara de detección).",
+    "Etiqueta: la frase completa. La pérdida CTC aprende sola la alineación cuadro-letra.",
+    "Mismo loop para todos: AdamW, one-cycle, early stopping por CER de validación, semilla 42.",
+    "Métrica principal: CER = ediciones / caracteres reales (la métrica de Kaggle es 1 − CER).",
+], Inches(0.7), Inches(1.8), Inches(6.4), Inches(5.0), size=16.5, gap=16)
+stat_card(slide, Inches(7.5), Inches(1.8), Inches(2.5), Inches(1.9), "227", "valores por\ncuadro")
+stat_card(slide, Inches(10.2), Inches(1.8), Inches(2.5), Inches(1.9), "64/14/14", "participantes\ntrain / val / test")
+stat_card(slide, Inches(7.5), Inches(3.9), Inches(2.5), Inches(1.9), "1,315", "secuencias de\nentrenamiento")
+stat_card(slide, Inches(10.2), Inches(3.9), Inches(2.5), Inches(1.9), "295 / 268", "secuencias de\nvalidación / prueba")
+add_page_number(slide, pagina())
+
+slide = content_slide("Modelado", "Los modelos comparados")
+y = Inches(1.75)
+for m, (nombre_m, color_m, rol, descripcion) in MODELOS.items():
+    add_rect(slide, Inches(0.7), y + Inches(0.08), Inches(0.28), Inches(0.5), rgb(color_m))
+    add_text(slide, nombre_m, Inches(1.2), y, Inches(2.6), Inches(0.6), size=20, bold=True, color=INK)
+    add_text(slide, f"{rol} · {descripcion}", Inches(3.9), y + Inches(0.05), Inches(5.6), Inches(0.6), size=15, color=MUTED)
+    estado = f"CER prueba {reportes[m]['cer_test']:.3f}" if m in reportes else "pendiente"
+    add_text(slide, estado, Inches(9.6), y + Inches(0.02), Inches(3.1), Inches(0.6), size=17, bold=m in reportes,
+             color=rgb(color_m) if m in reportes else MUTED, align=PP_ALIGN.RIGHT)
+    y += Inches(1.0)
+add_page_number(slide, pagina())
+
+slide = section_slide("", "Resultados", "Desempeño en prueba: personas que ningún modelo vio al entrenar")
+add_page_number(slide, pagina())
+
+if reportes:
+    mejor = orden[0]
+    slide = content_slide("Resultados", "CER por modelo")
+    add_picture_fit(slide, figura_cer(), Inches(0.5), Inches(1.6), Inches(8.3), Inches(5.5))
+    stat_card(slide, Inches(9.2), Inches(1.9), Inches(3.5), Inches(1.9), f"{reportes[mejor]['cer_test']:.3f}",
+              f"CER en prueba del mejor\nmodelo ({MODELOS[mejor][0]})")
+    stat_card(slide, Inches(9.2), Inches(4.1), Inches(3.5), Inches(1.9), f"{100 * (1 - reportes[mejor]['cer_test']):.0f} %",
+              "de caracteres correctos\n(aprox. 1 − CER)")
+    add_page_number(slide, pagina())
+
+    slide = content_slide("Resultados", "Costo vs. error")
+    add_picture_fit(slide, figura_costo(), Inches(0.5), Inches(1.6), Inches(8.3), Inches(5.5))
+    add_bullets(slide, [
+        f"{MODELOS[m][0]}: {reportes[m]['tiempo_entrenamiento_s'] / 60:.0f} min de entrenamiento, "
+        f"{reportes[m]['ms_por_secuencia']:.1f} ms por secuencia."
+        for m in orden
+    ] + ["El tamaño de cada burbuja es el número de parámetros."],
+        Inches(9.0), Inches(2.0), Inches(3.9), Inches(4.8), size=14.5, gap=12)
+    add_page_number(slide, pagina())
+
+TEXTO_MODELO = {
+    "cnn_bigru": [
+        "Más capacidad (256 canales, 192 unidades) dio el menor CER de validación.",
+        "Con stride 4: casi el mismo CER en un tercio del tiempo.",
+    ],
+    "transformer": [
+        "Lo que acelera el aprendizaje ayudó más (dropout 0.1, lr 0.003) que agregar capas o ancho.",
+        "Con stride 4: casi el mismo CER (0.588) en 7.5 min en vez de 18.",
+        "Empata con el CNN-BiGRU (Wilcoxon p = 0.21) con 37 % de sus parámetros y 3 veces más rápido al predecir.",
+    ],
+}
+for m, (nombre_m, color_m, rol, _) in MODELOS.items():
+    prefijo = {"cnn_bigru": "07", "transformer": "10", "lstm": "08", "bilstm": "09", "gru": "08"}[m]
+    tuning = FIGS / f"{prefijo}_{m}_tuning.png"
+    if m not in reportes or not tuning.exists():
+        continue
+    r = reportes[m]
+    slide = content_slide(f"Resultados · {rol}", f"{nombre_m}: ajuste de hiperparámetros")
+    add_picture_fit(slide, tuning, Inches(0.5), Inches(1.6), Inches(7.6), Inches(5.5))
+    add_bullets(slide, TEXTO_MODELO.get(m, []) + [
+        f"CER validación {r['cer_val']:.3f} · prueba {r['cer_test']:.3f}.",
+        f"{r['n_parametros'] / 1e6:.2f} M parámetros, {r['epocas']} épocas.",
+    ], Inches(8.4), Inches(1.9), Inches(4.4), Inches(5.0), size=15, gap=12, marker_color=rgb(color_m))
+    add_page_number(slide, pagina())
+
+errores = [(MODELOS[m][0], FIGS / f"{p}_{m}_error_por_caracter.png") for m, p in [("cnn_bigru", "07"), ("transformer", "10")]]
+errores = [(nombre_m, p) for nombre_m, p in errores if p.exists()]
+if errores:
+    slide = content_slide("Resultados", "Qué caracteres fallan: el desbalance del EDA se nota")
+    ancho = Inches(12.2) // len(errores)
+    for i, (nombre_m, p) in enumerate(errores):
+        add_text(slide, nombre_m, Inches(0.6) + i * ancho, Inches(1.55), ancho, Inches(0.4), size=15, bold=True, color=INK,
+                 align=PP_ALIGN.CENTER)
+        add_picture_fit(slide, p, Inches(0.6) + i * ancho, Inches(2.0), ancho - Inches(0.2), Inches(4.4))
+    add_text(slide, "Los caracteres raros en entrenamiento (q, x, z, j) se fallan casi siempre; la cobertura de mano es "
+             "lo que más explica el error de cada secuencia.", Inches(0.7), Inches(6.5), Inches(12), Inches(0.7), size=15,
+             color=MUTED)
+    add_page_number(slide, pagina())
+
+# Figuras de la comparacion de Daniela (notebooks/11), si ya existen
+for p in sorted(FIGS.glob("comparacion_*.png")):
+    slide = content_slide("Comparación de modelos", p.stem.removeprefix("comparacion_").replace("_", " ").capitalize())
+    add_picture_fit(slide, p, Inches(0.6), Inches(1.6), Inches(12.1), Inches(5.5))
+    add_page_number(slide, pagina())
+
+slide = section_slide("", "La app", "Streamlit + Plotly: explorar, predecir y comparar")
+add_page_number(slide, pagina())
+
+def recorte_app(archivo, caja):
+    """Recorta una captura de pagina completa a la zona que se ve en la diapositiva (caja en proporciones)."""
+    im = Image.open(FIGS / archivo)
+    w, h = im.size
+    destino = FIGS / f"presentacion_{archivo}"
+    im.crop((int(caja[0] * w), int(caja[1] * h), int(caja[2] * w), int(caja[3] * h))).save(destino)
+    return destino
+
+
+RECORTES_APP = {"app_predecir.png": (0.26, 0.42, 0.95, 0.72), "app_rendimiento.png": (0.25, 0.03, 0.95, 0.30)}
+
+for archivo, titulo, puntos in [
+    ("app_predecir.png", "Predecir: frase real vs. predicha", [
+        "Se elige una secuencia de prueba o se sube un parquet de landmarks (se preprocesa igual que en el entrenamiento).",
+        "Uno o todos los modelos a la vez.",
+        "Cada carácter se colorea según la alineación: correcto, sustituido, insertado u omitido.",
+    ]),
+    ("app_rendimiento.png", "Rendimiento: gráficas interactivas", [
+        "CER por modelo, curvas de entrenamiento, costo vs. error y error por carácter.",
+        "Cada gráfica se puede ocultar; los modelos se filtran en la barra lateral.",
+        "Un color fijo por modelo en toda la app y en esta presentación.",
+    ]),
+]:
+    if not (FIGS / archivo).exists():
+        continue
+    slide = content_slide("La app", titulo)
+    add_picture_fit(slide, recorte_app(archivo, RECORTES_APP[archivo]), Inches(0.5), Inches(1.55), Inches(8.4), Inches(5.7))
+    add_bullets(slide, puntos, Inches(9.2), Inches(2.0), Inches(3.7), Inches(4.8), size=15, gap=14)
+    add_page_number(slide, pagina())
+
+# Actualizar cuando entren la LSTM, la GRU y la BiLSTM
+CONCLUSIONES = [
+    "Con solo 1,315 secuencias de entrenamiento, los modelos transcriben alrededor del 50 % de los caracteres de personas que no vieron al entrenar.",
+    "El CNN-BiGRU (CER 0.490) y el Transformer (CER 0.499) empatan en error; el Transformer lo logra con un tercio de los parámetros y del tiempo de predicción.",
+    "Los hallazgos del EDA explican el error: la cobertura de mano es el factor más fuerte (Spearman ≈ −0.7), y los caracteres raros (q, x, z) se fallan casi siempre.",
+    "El error dominante es omitir letras (68-76 %), sobre todo espacios y letras frecuentes.",
+    "El límite lo pone la cantidad de datos, no la arquitectura: la mejora más directa es la aumentación y usar más archivos de la competencia.",
+]
+if CONCLUSIONES:
+    slide = content_slide("Conclusiones", "Qué aprendimos")
+    add_bullets(slide, CONCLUSIONES, Inches(0.7), Inches(1.8), Inches(11.9), Inches(5.2), size=17, gap=16)
+    add_page_number(slide, pagina())
 
 # 14. Cierre -----------------------------------------------------------
 slide = new_slide(NAVY)
