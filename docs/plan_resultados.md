@@ -96,14 +96,10 @@ La única dependencia fuerte era la **parte inicial** (datos para modelado + loo
 - [x] Informe (`docs/06_marco_teorico_metodologia.md`): **Marco teórico** (adaptar la revisión bibliográfica del Avance 2 + MediaPipe/landmarks), **Metodología** (pasos, split, herramientas y cómputo) y **Referencias APA**.
 
 ### Daniela – Línea base + comparación de modelos
-- [ ] `src/models/lstm.py` (+ `gru.py`) + `notebooks/08_modelo_lstm.ipynb`: LSTM unidireccional + CTC (línea base) y GRU unidireccional (ablación); tuning básico.
-- [ ] `notebooks/11_comparacion_modelos.ipynb`: leer `reports/metrics/*.json` y comparar CER, tiempo de entrenamiento, ms por secuencia y n.º de parámetros.
-- [ ] Al menos **3 visualizaciones estáticas** en `reports/figures/` (p. ej. CER por modelo, curvas de entrenamiento, error por carácter / matriz de confusión de letras M-N-T).
-- [ ] Informe: **Resultados y análisis** – ajuste de parámetros y comparación de algoritmos.
-- > ⚠️ **Pendiente para María José — borrar esta nota al implementarlo:** guardar los modelos con
-  > `train.guardar_resultados("lstm", ...)` y `train.guardar_resultados("gru", ...)` (esos nombres exactos): la app y
-  > la presentación los detectan solos. Guardar las figuras de comparación como `reports/figures/comparacion_*.png`
-  > para incluirlas en la presentación. Para colores coherentes con la app, usar `app/utils.py:COLORES`.
+- [x] `src/models/lstm.py` (+ `gru.py`) + `notebooks/08_modelo_lstm.ipynb`: LSTM unidireccional + CTC (línea base) y GRU unidireccional (ablación); tuning de 4 variantes por celda. CER test LSTM 0.566, GRU 0.537 (la GRU le gana a la LSTM con 23 % menos parámetros, Wilcoxon p = 6e-6), guardados en `models/{lstm,gru}.pt` y `reports/metrics/{lstm,gru}.json`.
+- [x] `notebooks/11_comparacion_modelos.ipynb`: compara CER (IC 95 % por bootstrap y Wilcoxon por pares), costo, curvas, tipos de error, error por carácter y CER por cobertura de mano.
+- [x] 5 visualizaciones estáticas en `reports/figures/comparacion_*.png` (CER, costo, curvas, error por carácter, cobertura de mano), más `08_lstm_tuning.png`, `08_gru_tuning.png` y `08_lstm_gru_entrenamiento.png`.
+- [x] Informe: **Resultados y análisis** – ajuste de parámetros y comparación de algoritmos en `docs/09_resultados_analisis.md`.
 
 ### José – BiLSTM + exploración de datos en la app
 - [ ] `src/models/bilstm.py` + `notebooks/09_modelo_bilstm.ipynb`: BiLSTM + CTC; tuning comparable al de la BiGRU.
